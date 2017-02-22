@@ -87,6 +87,10 @@
 	border-top: 1px solid rgba(128, 128, 128, 0.35);
 }
 
+.vs .monaco-workbench .repl .repl-input-wrapper {
+	border-top-color:rgba(0,0,0,0.045);
+}
+
 .monaco-workbench .repl .repl-tree .monaco-tree .monaco-tree-rows > .monaco-tree-row {
 	cursor: default;
 }
