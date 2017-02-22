@@ -13,5 +13,10 @@
 	"win32AppUserModelId": "WilliamEsz.CodeEssence",
 	"darwinBundleIdentifier": "space.esz.code.essence",
 	"reportIssueUrl": "https://github.com/Microsoft/vscode/issues/new",
-	"urlProtocol": "code-essence"
+	"urlProtocol": "code-essence",
+	"extensionsGallery": {
+		"serviceUrl": "https://marketplace.visualstudio.com/_apis/public/gallery",
+		"cacheUrl": "https://vscode.blob.core.windows.net/gallery/index",
+		"itemUrl": "https://marketplace.visualstudio.com/items"
+	}
 }
