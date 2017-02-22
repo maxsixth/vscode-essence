@@ -182,7 +182,7 @@ export class MessageList {
 
 		// Support animation for messages by moving the container out of view and then in
 		if (animate) {
-			$(this.messageListContainer).style('top', '-39px');
+			$(this.messageListContainer).style('top', '-61px'); // 39px (titlebar h) + 22px (messagelist initial position)
 		}
 
 		// Render Messages as List Items
@@ -215,10 +215,7 @@ export class MessageList {
 
 		$(this.messageListContainer).removeClass('transition'); // disable any animations
 
-		let position = 0;
-		if (!browser.isFullscreen() && DOM.hasClass(this.container, 'titlebar-style-custom')) {
-			position = 22 / browser.getZoomFactor(); // adjust the position based on title bar size and zoom factor
-		}
+		let position = 22;
 
 		$(this.messageListContainer).style('top', `${position}px`);
 	}
