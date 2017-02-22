@@ -34,7 +34,7 @@ export interface IWindowCreationOptions {
 	extensionDevelopmentPath?: string;
 	isExtensionTestHost?: boolean;
 	allowFullscreen?: boolean;
-	titleBarStyle?: 'native' | 'custom';
+	titleBarStyle?: 'native' | 'custom' | 'hidden-inset';
 }
 
 export enum WindowMode {
@@ -207,7 +207,7 @@ export class VSCodeWindow implements IVSCodeWindow {
 		if (platform.isMacintosh && (!this.options.titleBarStyle || this.options.titleBarStyle === 'custom')) {
 			const isDev = !this.environmentService.isBuilt || !!config.extensionDevelopmentPath;
 			if (!isDev) {
-				options.titleBarStyle = 'hidden'; // not enabled when developing due to https://github.com/electron/electron/issues/3647
+				options.titleBarStyle = 'hidden-inset'; // not enabled when developing due to https://github.com/electron/electron/issues/3647
 				this.hiddenTitleBarStyle = true;
 			}
 		}

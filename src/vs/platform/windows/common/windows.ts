@@ -92,7 +92,7 @@ export interface IWindowSettings {
 	reopenFolders: 'all' | 'one' | 'none';
 	restoreFullscreen: boolean;
 	zoomLevel: number;
-	titleBarStyle: 'native' | 'custom';
+	titleBarStyle: 'native' | 'custom' | 'hidden-inset';
 	autoDetectHighContrast: boolean;
 	menuBarVisibility: MenuBarVisibility;
 	newWindowDimensions: 'default' | 'inherit' | 'maximized' | 'fullscreen';
