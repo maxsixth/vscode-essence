@@ -29,7 +29,7 @@
 .modified-in-monaco-diff-editor				.slider.active { background: rgba(171, 171, 171, .4); }
 .modified-in-monaco-diff-editor.hc-black	.slider.active { background: none; }
 
-.monaco-diff-editor.side-by-side			.editor.modified { box-shadow: -6px 0 5px -5px #DDD; }
+/*.monaco-diff-editor.side-by-side			.editor.modified { box-shadow: -6px 0 5px -5px #DDD; }*/
 .monaco-diff-editor.side-by-side.vs-dark	.editor.modified { box-shadow: -6px 0 5px -5px black; }
 
 /* ---------- Diff ---------- */
