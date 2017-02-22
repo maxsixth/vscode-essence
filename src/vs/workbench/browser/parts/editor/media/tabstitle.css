@@ -288,3 +288,13 @@
 	flex: initial;
 	padding-left: 4px;
 }
+
+.monaco-workbench.nosidebar .title .editor-actions,
+.monaco-workbench.nosidebar .title-actions {
+	display: none !important;
+}
+
+.monaco-workbench:not(.nosidebar) .title .editor-actions,
+.monaco-workbench:not(.nosidebar) .title-actions {
+	display: block !important;
+}

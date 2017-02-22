@@ -50,6 +50,7 @@
 
 .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .title-actions .action-label,
 .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .editor-actions .action-label {
+	display: block;
 	height: 39px;
 	line-height: 39px;
 	min-width: 28px;
@@ -58,22 +59,11 @@
 	background-repeat: no-repeat;
 }
 
+/*
 .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .editor-actions .action-label .label,
 .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .title-actions .action-label .label {
 	display: none;
-}
-
-.monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .title-actions .action-label {
-	display: none;
-}
-
-.monaco-workbench.nosidebar .action-label.toolbar-toggle-more {
-	display: none;
-}
-
-.monaco-workbench:not(.nosidebar) .action-label.toolbar-toggle-more {
-	display: block !important;
-}
+}*/
 
 .hc-black .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .title-actions .action-label,
 .hc-black .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .editor-actions .action-label {
