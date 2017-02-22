@@ -3,6 +3,22 @@
  *  Licensed under the MIT License. See License.txt in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+.vs .monaco-workbench:not(.fullscreen) > .part.editor > .content > .one-editor-silo.editor-one > .container > .title:before {
+	/* Make area under traffic lights opaque and draggable. */
+
+	content: '';
+	top: 0;
+	left: 0;
+	width: 79px;
+	height: 39px;
+	background: #fff;
+	-webkit-app-region: drag;
+	/*border-right: 1px solid;
+	border-image: linear-gradient(to bottom, #e7e7e7, #e7e7e7 54%, rgba(232, 232, 232, 0)) 1 100%;*/
+	box-shadow: 18px 0 22.5px 0 white;
+	z-index: 99999;
+}
+
 .monaco-workbench > .part > .title {
 	display: none; /* Parts have to opt in to show title area */
 }
@@ -15,6 +31,17 @@
 	display: flex;
 	box-sizing:	border-box;
 	overflow: hidden;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.045);
+}
+
+.monaco-workbench > .part > .title,
+.monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title:not(.tabs) {
+	height: 39px !important;
+}
+
+.monaco-workbench > .part > .title,
+.monaco-workbench > .part.editor > .content:not(.multiple-editors) > .one-editor-silo > .container > .title:not(.tabs) {
+	-webkit-app-region: drag;
 }
 
 .monaco-workbench > .part > .title {
@@ -23,7 +50,7 @@
 }
 
 .monaco-workbench > .part > .title > .title-label {
-	line-height: 35px;
+	line-height: 39px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;

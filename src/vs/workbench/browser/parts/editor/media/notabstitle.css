@@ -6,11 +6,13 @@
 /* Title Label */
 
 .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .title-label {
-	line-height: 35px;
+	line-height: 39px;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	text-align: right;
 	position: relative;
 	padding-left: 20px;
+	padding-right: 36px;
 }
 
 .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .monaco-icon-label::before {

@@ -44,7 +44,7 @@
 
 .vs .monaco-workbench > .activitybar > .content .monaco-action-bar .action-item .action-label:focus:before,
 .vs-dark .monaco-workbench > .activitybar > .content .monaco-action-bar .action-item .action-label:focus:before {
-	border-left-color: #007ACC;
+	border-left-color: #778899;
 }
 
 .hc-black .monaco-workbench > .activitybar > .content .monaco-action-bar .action-item .action-label:focus:before {
@@ -105,7 +105,7 @@
 	border-radius: 20px;
 	text-align: center;
 	color: white;
-	background-color: #007ACC;
+	background-color: #778899;
 }
 
 .monaco-workbench > .activitybar > .content .monaco-action-bar .action-item .action-label.active,

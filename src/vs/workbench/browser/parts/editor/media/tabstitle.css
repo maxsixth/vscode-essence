@@ -5,8 +5,12 @@
 
 /* Title Container */
 
+/*.vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title.tabs {
+	background: #FFF;
+}*/
+
 .vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title.tabs.shows-tabs {
-	background: #F3F3F3;
+	background: #FFF;
 }
 
 .vs-dark .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title.tabs.shows-tabs {
@@ -30,7 +34,7 @@
 
 .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container {
 	display: flex;
-	height: 35px;
+	height: 39px;
 }
 
 .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container.scroll {
@@ -49,7 +53,7 @@
 	min-width: fit-content;
 	white-space: nowrap;
 	cursor: pointer;
-	height: 35px;
+	height: 39px;
 	box-sizing: border-box;
 	border: 1px solid transparent;
 	padding-left: 10px;
@@ -61,8 +65,35 @@
 	padding-right: 10px;
 }
 
+.vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab {
+	border-left: 1px solid;
+	border-right: none;
+	border-image: linear-gradient(to bottom, #e7e7e7, #e7e7e7 54%, rgba(232, 232, 232, 0)) 1 100%;
+	padding-left: 22.5px !important;
+	text-align: center;
+}
+
+.vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab.no-close-button {
+	padding-right: 22.5px;
+}
+
+.vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab.no-close-button.dirty:before {
+	content: '';
+	position: absolute;
+	width: 54px;
+	height: 1px;
+	bottom: 4.5px;
+	left: calc(50% - 27px);
+	background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.135), rgba(255, 255, 255, 0));
+}
+
+.vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab.no-close-button.dirty:before {
+	position: relative;
+	background-image: none;
+}
+
 .vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab:not(.active) {
-	background-color: #ECECEC;
+	background-color: #fff;
 }
 
 .vs-dark .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab:not(.active) {
@@ -88,6 +119,16 @@
 .vs-dark .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab:first-child,
 .vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab:first-child {
 	border-left-color: transparent;
+}
+
+.vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab:first-child {
+	border-left: none;
+}
+
+.vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab:last-child:not(:first-child) {
+	border-left: none;
+	border-right: 1px solid;
+	border-image: linear-gradient(to bottom, #e7e7e7, #e7e7e7 54%, rgba(232, 232, 232, 0)) 1 100%;
 }
 
 .hc-black .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab:not(:first-child) {
@@ -139,6 +180,14 @@
 
 .vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab .tab-label {
 	opacity: 0.7 !important;
+}
+
+.vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab.active .tab-label a {
+	color: #545454 !important;
+}
+
+.vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab:not(.active) .tab-label a {
+	color: #bbb !important;
 }
 
 .vs-dark .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab .tab-label {

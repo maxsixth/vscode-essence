@@ -24,6 +24,10 @@
 		url('flipped-cursor.svg') 1x,
 		url('flipped-cursor-2x.svg') 2x
 	) 30 0, default;
+
+	opacity: 0;
+	transition: opacity 0.09s ease-in-out;
+	will-change: opacity;
 }
 
 .monaco-workbench .monaco-editor.mac .margin-view-overlays .line-numbers {
@@ -31,6 +35,10 @@
 		url('flipped-cursor-mac.svg') 1x,
 		url('flipped-cursor-mac-2x.svg') 2x
 	) 24 3, default;
+}
+
+.monaco-workbench .monaco-editor .margin-view-overlays .line-numbers:hover {
+	opacity: 1;
 }
 
 .monaco-editor .margin-view-overlays .line-numbers.lh-odd {

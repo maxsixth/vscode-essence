@@ -96,7 +96,7 @@
 /* ---------- Default Style ---------- */
 
 .vs .monaco-scrollable-element > .scrollbar > .slider {
-	background: rgba(100, 100, 100, .4);
+	background: rgba(0, 0, 0, 0.0675);
 }
 .vs-dark .monaco-scrollable-element > .scrollbar > .slider {
 	background: rgba(121, 121, 121, .4);

@@ -7,7 +7,6 @@
 	font-size: 12px;
 	position: absolute;
 	z-index: 300;
-	color: #eee;
 	list-style-type: none;
 	line-height: 35px;
 	margin: 0;
@@ -17,7 +16,11 @@
 }
 
 .vs .global-message-list {
-	box-shadow: 0 5px 8px #A8A8A8;
+	background: #bbb !important;
+	color: white;
+	transition: top .2s ease-in-out !important;
+	border-radius: 4.5px;
+	box-shadow: 0 0 72px rgba(0, 0, 0, 0.18);
 }
 
 .vs-dark .global-message-list  {
@@ -51,10 +54,12 @@
 }
 
 .global-message-list li.message-list-entry-with-action {
+	border-radius: 4.5px;
 	padding-right: 0;
 }
 
 .global-message-list li.message-list-entry .message-left-side {
+	font-weight: 500;
 	-webkit-user-select: text;
 	-ms-user-select: text;
 	-khtml-user-select: text;
@@ -68,6 +73,8 @@
 	margin-right: 10px;
 	font-weight: bold;
 	font-size: 11px;
+	border-radius: 2.25px;
+	text-transform: uppercase;
 	-webkit-user-select: none;
 	-ms-user-select: none;
 	-khtml-user-select: none;
@@ -93,11 +100,11 @@
 }
 
 .vs .global-message-list li.message-list-entry .message-left-side.severity.app-info {
-	background-color: #007ACC;
+	background-color: #778899;
 }
 
 .vs-dark .global-message-list li.message-list-entry .message-left-side.severity.app-info {
-	background-color: #007ACC;
+	background-color: #778899;
 }
 
 .global-message-list li.message-list-entry .message-left-side.message-overflow-ellipsis {
@@ -116,11 +123,13 @@
 }
 
 .vs .global-message-list li.message-list-entry .actions-container .message-action {
-	background-color: #1382CE;
+	background-color: transparent;
+	font-weight: 700;
+	color: white;
 }
 
 .vs .global-message-list li.message-list-entry .actions-container .message-action:hover {
-	background-color: rgb(0, 107, 179);
+	background-color: ccc;
 }
 
 .vs-dark .global-message-list li.message-list-entry .actions-container .message-action {
@@ -128,7 +137,7 @@
 }
 
 .vs-dark .global-message-list li.message-list-entry .actions-container .message-action:hover {
-	background-color: #007ACC;
+	background-color: #778899;
 }
 
 .global-message-list li.message-list-entry .actions-container .message-action .action-button {

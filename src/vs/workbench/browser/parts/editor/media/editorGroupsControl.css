@@ -79,7 +79,8 @@
 
 .vs .monaco-workbench > .editor > .content.vertical-layout > .one-editor-silo.editor-two,
 .vs .monaco-workbench > .editor > .content.vertical-layout > .one-editor-silo.editor-three {
-	border-left: 1px solid #E7E7E7;
+	border-left: 1px solid;
+	border-image: linear-gradient(to top, #e7e7e7, #e7e7e7 90%, rgba(232, 232, 232, 0)) 1 100%;
 }
 
 .vs .monaco-workbench > .editor > .content.horizontal-layout > .one-editor-silo.editor-two,

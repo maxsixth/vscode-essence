@@ -37,7 +37,7 @@
 }
 
 .vs .monaco-workbench > .part.panel > .title > .panel-switcher-container > .monaco-action-bar .action-item .action-label {
-	color: #424242;
+	color: #BBBBBB;
 	opacity: 0.75;
 }
 
@@ -81,7 +81,7 @@
 
 .vs .monaco-workbench > .part.panel > .title > .panel-switcher-container > .monaco-action-bar .action-item .action-label:focus,
 .vs-dark .monaco-workbench > .part.panel > .title > .panel-switcher-container > .monaco-action-bar .action-item .action-label:focus {
-	border-bottom: 1px solid #007ACC;
+	border-bottom: 1px solid #778899;
 	outline: none !important;
 }
 

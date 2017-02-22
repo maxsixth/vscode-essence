@@ -107,7 +107,7 @@
 	margin-left: 0.4em;
 }
 
-.git-viewlet > .changes-view > .status-view > .monaco-tree .monaco-tree-row .file-status.modified .status	{ background-color: #007ACC; }
+.git-viewlet > .changes-view > .status-view > .monaco-tree .monaco-tree-row .file-status.modified .status	{ background-color: #778899; }
 .git-viewlet > .changes-view > .status-view > .monaco-tree .monaco-tree-row .file-status.added .status		{ background-color: #2d883e; }
 .git-viewlet > .changes-view > .status-view > .monaco-tree .monaco-tree-row .file-status.deleted .status	{ background-color: #B9131A; }
 .git-viewlet > .changes-view > .status-view > .monaco-tree .monaco-tree-row .file-status.renamed .status	{ background-color: #4668C5; }

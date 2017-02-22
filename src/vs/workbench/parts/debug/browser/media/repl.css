@@ -157,7 +157,7 @@
 }
 
 .vs .monaco-workbench .repl .repl-tree .monaco-tree .monaco-tree-row > .content > .output.expression > .annotation {
-	color: #007ACC;
+	color: #778899;
 }
 
 .vs-dark .monaco-workbench .repl .repl-tree .monaco-tree .monaco-tree-row > .content > .output.expression > .annotation {
@@ -169,7 +169,7 @@
 }
 
 .vs .monaco-workbench .repl .repl-tree .monaco-tree .monaco-tree-row > .content > .output.expression > .counter.info {
-	background-color: #007ACC;
+	background-color: #778899;
 	color: white;
 }
 

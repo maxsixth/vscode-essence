@@ -37,11 +37,15 @@
 	overflow: hidden;
 	line-height: 19px;
 
-	-webkit-transition: top 200ms linear;
-	-o-transition: top 200ms linear;
-	-moz-transition: top 200ms linear;
-	-ms-transition: top 200ms linear;
-	transition: top 200ms linear;
+	background-color: #f3f3f3;
+	border: 1px solid #ddd;
+	box-shadow: 0 0 54px rgba(0,0,0,0.045);
+
+	-webkit-transition: top 180ms ease-in-out;
+	-o-transition: top 180ms ease-in-out;
+	-moz-transition: top 180ms ease-in-out;
+	-ms-transition: top 180ms ease-in-out;
+	transition: top 180ms ease-in-out;
 
 	padding: 0 4px;
 }
@@ -54,8 +58,12 @@
 	display: inline-block;
 }
 
-.monaco-editor .find-widget.visible,
+.monaco-editor .find-widget.visible {
+	top: 14px;
+}
+
 .monaco-editor .find-widget.replaceToggled.visible {
+	/* TODO: check */
 	top: 0;
 }
 

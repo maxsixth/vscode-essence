@@ -48,7 +48,7 @@
 }
 
 .vs .settings-tabs-widget > .monaco-action-bar .action-item .action-label:not(.disabled) {
-	color: #424242;
+	color: #BBBBBB;
 	opacity: 0.75;
 }
 
@@ -80,7 +80,7 @@
 
 .vs .settings-tabs-widget > .monaco-action-bar .action-item .action-label:focus,
 .vs-dark .settings-tabs-widget > .monaco-action-bar .action-item .action-label:focus {
-	border-bottom: 1px solid #007ACC;
+	border-bottom: 1px solid #778899;
 	outline: none !important;
 }
 
@@ -251,7 +251,7 @@
 }
 
 .monaco-editor .floating-click-widget {
-	background: #007ACC;
+	background: #778899;
 	color: white;
 	padding: 10px;
 	border-radius: 5px;

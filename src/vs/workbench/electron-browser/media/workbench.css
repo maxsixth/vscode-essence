@@ -48,9 +48,11 @@
 
 /* ---------- Light Theme ---------- */
 
-.vs .monaco-workbench	{ background-color: #F3F3F3; }
+.vs .monaco-workbench { background-color: transparent; }
 
-.vs .monaco-workbench .sidebar .separator	{ background-color: #EFEFF2; }
+.vs .monaco-workbench .sidebar { background: #f3f3f3; }
+
+.vs .monaco-workbench .sidebar .separator { background-color: #EFEFF2; }
 
 .vs .monaco-workbench input {
 	background-color: white;

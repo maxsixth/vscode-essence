@@ -33,13 +33,13 @@
 /* Theming */
 
 .vs .monaco-workbench > .part.titlebar {
-	background: #ddd;
-	color: #333333;
+	height: 4.5px;
+	opacity: 0;
 }
 
-.vs .monaco-workbench > .part.titlebar.blurred {
+/*.vs .monaco-workbench > .part.titlebar.blurred {
 	opacity: 0.6;
-}
+}*/
 
 .vs-dark .monaco-workbench > .part.titlebar {
 	background: #3c3c3c;

@@ -38,7 +38,7 @@
 }
 
 .custom-checkbox.checked {
-	border-color: #007ACC;
+	border-color: #778899;
 }
 
 .vs-dark .custom-checkbox:hover {
@@ -46,7 +46,7 @@
 }
 
 .vs-dark .custom-checkbox.checked {
-	border-color: #007ACC;
+	border-color: #778899;
 }
 
 .hc-black .custom-checkbox {

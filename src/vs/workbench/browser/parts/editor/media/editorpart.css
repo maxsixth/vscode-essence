@@ -15,13 +15,19 @@
 	background-color: #000;
 }
 
+.monaco-workbench .monaco-editor-background:not(.one-editor-silo):not(.panel),
+.monaco-workbench > .part.activitybar,
+.monaco-workbench > .part.sidebar {
+	top: 0 !important;
+}
+
 .monaco-workbench .part.editor {
 	background-repeat: no-repeat;
 	background-position: 50% 50%;
 }
 
 .monaco-workbench .part.editor.empty {
-	background-image: url('letterpress.svg');
+	-webkit-app-region: drag;
 }
 
 .vs-dark .monaco-workbench .part.editor.empty {

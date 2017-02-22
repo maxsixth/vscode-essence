@@ -122,11 +122,11 @@
 }
 
 .monaco-shell.vs .monaco-tree.focused .monaco-tree-row.focused [tabindex="0"]:focus {
-	outline: 1px solid #007ACC; /* higher contrast color for focusable elements in a row that shows focus feedback */
+	outline: 1px solid #778899; /* higher contrast color for focusable elements in a row that shows focus feedback */
 }
 
 .monaco-shell.vs-dark .monaco-tree.focused .monaco-tree-row.focused [tabindex="0"]:focus {
-	outline: 1px solid #007ACC; /* higher contrast color for focusable elements in a row that shows focus feedback */
+	outline: 1px solid #778899; /* higher contrast color for focusable elements in a row that shows focus feedback */
 }
 
 .monaco-shell .monaco-tree.focused.no-focused-item:focus:before {

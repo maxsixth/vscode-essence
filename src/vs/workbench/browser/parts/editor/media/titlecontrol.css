@@ -51,12 +51,20 @@
 .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .title-actions .action-label,
 .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .editor-actions .action-label {
 	display: block;
-	height: 35px;
-	line-height: 35px;
+	height: 39px;
+	line-height: 39px;
 	min-width: 28px;
 	background-size: 16px;
 	background-position: center center;
 	background-repeat: no-repeat;
+}
+
+.monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .title-actions .action-label {
+	display: none !important;
+}
+
+.monaco-workbench:not(.nosidebar) > .part.editor > .content > .one-editor-silo.editor-one > .container> .title .title-actions .action-label.toolbar-toggle-more {
+	display: block !important;
 }
 
 .hc-black .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .title-actions .action-label,
