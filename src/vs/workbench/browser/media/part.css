@@ -42,11 +42,6 @@
 	border-bottom: 1px solid #dcdcdc;
 }
 
-.monaco-workbench > .part > .title,
-.monaco-workbench > .part.editor > .content:not(.multiple-editors) > .one-editor-silo > .container > .title:not(.tabs) {
-	-webkit-app-region: drag;
-}
-
 .monaco-workbench > .part > .title {
 	padding-left: 8px;
 	padding-right: 8px;
