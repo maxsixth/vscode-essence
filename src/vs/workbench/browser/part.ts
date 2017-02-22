@@ -84,7 +84,7 @@ export abstract class Part extends WorkbenchComponent {
 	}
 }
 
-const TITLE_HEIGHT = 35;
+const TITLE_HEIGHT = 39;
 
 export class PartLayout {
 

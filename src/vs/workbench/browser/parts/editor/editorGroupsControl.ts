@@ -92,7 +92,7 @@ export class EditorGroupsControl implements IEditorGroupsControl, IVerticalSashL
 	private static MIN_EDITOR_WIDTH = 170;
 	private static MIN_EDITOR_HEIGHT = 70;
 
-	private static EDITOR_TITLE_HEIGHT = 35;
+	private static EDITOR_TITLE_HEIGHT = 39;
 
 	private static SNAP_TO_MINIMIZED_THRESHOLD_WIDTH = 50;
 	private static SNAP_TO_MINIMIZED_THRESHOLD_HEIGHT = 20;
