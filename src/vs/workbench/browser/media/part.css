@@ -27,16 +27,11 @@
 
 .monaco-workbench > .part > .title,
 .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title {
-	height: 35px;
+	height: 39px;
 	display: flex;
 	box-sizing:	border-box;
 	overflow: hidden;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.045);
-}
-
-.monaco-workbench > .part > .title,
-.monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title:not(.tabs) {
-	height: 39px !important;
 }
 
 .monaco-workbench > .part > .title,
@@ -72,14 +67,14 @@
 }
 
 .monaco-workbench > .part > .title > .title-actions {
-	height: 35px;
+	height: 39px;
 	flex: 1;
 	padding-left: 5px;
 }
 
 .monaco-workbench > .part > .title > .title-actions .action-label {
 	display: block;
-	height: 35px;
+	height: 39px;
 	width: 28px;
 	background-size: 16px;
 	background-position: center center;
@@ -97,7 +92,7 @@
 .monaco-workbench > .part > .content  .progress-container {
 	position: absolute;
 	left: 0;
-	top: 33px; /* at the bottom of the 35px height title container */
+	top: calc(39px - 2px); /* at the bottom of the 39px height title container */
 	z-index: 5; /* on top of things */
 	height: 2px;
 }

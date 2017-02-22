@@ -202,7 +202,7 @@
 
 .monaco-shell .feedback-form .form-buttons .send.in-progress,
 .monaco-shell .feedback-form .form-buttons .send:hover {
-	background-color: #006BB3;
+	background-color: #667788;
 }
 
 .monaco-shell .feedback-form .form-buttons .send:disabled {

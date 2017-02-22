@@ -149,5 +149,5 @@
 }
 
 .monaco-workbench > .editor > .content > .one-editor-silo > .container > .editor-container {
-	height: calc(100% - 35px); /* Editor is below editor title */
+	height: calc(100% - 39px); /* Editor is below editor title */
 }

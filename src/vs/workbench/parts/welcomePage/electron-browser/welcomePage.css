@@ -36,10 +36,6 @@
 	font-size: 1.3em;
 }
 
-.monaco-workbench > .part.editor > .content .welcomePage .keyboard {
-	font-family: "Lucida Grande", sans-serif;/* Keyboard shortcuts */
-}
-
 .monaco-workbench > .part.editor > .content .welcomePage a {
 	color: #2e70c0;
 	text-decoration: none;

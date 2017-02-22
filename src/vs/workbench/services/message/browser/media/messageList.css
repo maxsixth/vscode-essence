@@ -8,7 +8,7 @@
 	position: absolute;
 	z-index: 300;
 	list-style-type: none;
-	line-height: 35px;
+	line-height: 39px;
 	margin: 0;
 	padding: 0;
 	width: 70%;
@@ -50,7 +50,7 @@
 	-moz-box-sizing:	border-box;
 	-ms-box-sizing:		border-box;
 	box-sizing: 		border-box; /* Important so that borders added don't add to the overal size */
-	height: 35px;
+	height: 39px;
 }
 
 .global-message-list li.message-list-entry-with-action {

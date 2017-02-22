@@ -15,7 +15,8 @@
 	display: block;
 	position: absolute;
 	width: 100%;
-	top: calc(50% + 55px);
+	top: 50%;
+	transform: translateY(-50%);
 	text-align: center;
 	white-space: nowrap;
 	overflow: hidden;
@@ -64,16 +65,11 @@
 
 .monaco-workbench.mac > .part.editor.empty > .content > .watermark dd > .shortcuts {
 	letter-spacing: 0.15em;
-	font-family: "Lucida Grande", sans-serif;
 }
 
 .monaco-workbench > .part.editor.empty > .content > .watermark dd > .unbound {
 	padding-left: 0.5em;
 	padding-right: 0.5em;
-}
-
-.monaco-workbench.mac > .part.editor.empty > .content > .watermark dd > .unbound {
-	font-family: "Lucida Grande", sans-serif;
 }
 
 .monaco-workbench > .part.editor.empty > .content > .watermark dt,

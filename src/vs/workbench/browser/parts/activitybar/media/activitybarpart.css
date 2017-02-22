@@ -18,7 +18,7 @@
 
 .vs .monaco-workbench > .activitybar > .content {
 	background-color: #CCC;
-	padding-bottom: 4px; /* TODO: Fix? */
+	padding-bottom: 4px;
 }
 
 .vs .monaco-workbench > .activitybar > .content:before {
@@ -26,7 +26,7 @@
 	position: absolute;
 	left: 0;
 	width: 1px;
-	height: 101%;
+	height: calc(100% + 4px);
 	background: #bbb;
 }
 

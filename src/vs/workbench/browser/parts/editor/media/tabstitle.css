@@ -121,14 +121,8 @@
 	border-left-color: transparent;
 }
 
-.vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab:first-child {
-	border-left: none;
-}
-
-.vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab:last-child:not(:first-child) {
-	border-left: none;
-	border-right: 1px solid;
-	border-image: linear-gradient(to bottom, #e7e7e7, #e7e7e7 54%, rgba(232, 232, 232, 0)) 1 100%;
+.vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab:last-child {
+	border-right: none;
 }
 
 .hc-black .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .tabs-container > .tab:not(:first-child) {

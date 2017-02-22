@@ -12,11 +12,10 @@
 }
 
 .monaco-action-bar .action-item.markers-panel-action-filter .monaco-inputbox {
-	height: 25px;
+	height: calc(39px - (39px - (25px + 4px))); /* 39px bar h; 25px = inputbox h; 4px bottom margin */
 }
 
 .vs .monaco-action-bar .action-item.markers-panel-action-filter .monaco-inputbox {
-	height: 25px;
 	border: 1px solid #ddd;
 }
 
@@ -26,6 +25,7 @@
 
 .markers-panel .markers-panel-container .message-box-container {
 	line-height: 22px;
+	padding-top: 10px;
 	padding-left: 20px;
 }
 

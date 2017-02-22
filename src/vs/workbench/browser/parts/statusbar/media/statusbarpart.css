@@ -80,10 +80,6 @@
 	pointer-events: none;
 }
 
-.vs .monaco-workbench.no-workspace > .part.statusbar {
-	display: none;
-}
-
 .vs .monaco-workbench > .part.statusbar > .statusbar-item a:hover:not([disabled]):not(.disabled) {
 	background-color: hsla(0, 0%, 0%, .045);
 }

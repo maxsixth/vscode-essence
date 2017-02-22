@@ -182,7 +182,7 @@ export class MessageList {
 
 		// Support animation for messages by moving the container out of view and then in
 		if (animate) {
-			$(this.messageListContainer).style('top', '-35px');
+			$(this.messageListContainer).style('top', '-39px');
 		}
 
 		// Render Messages as List Items

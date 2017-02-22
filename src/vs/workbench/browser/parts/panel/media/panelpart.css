@@ -15,7 +15,7 @@
 .monaco-workbench > .part.panel .title {
 	border-top: 1px solid rgba(128, 128, 128, 0.35);
 	padding-right: 0px;
-	height: 35px;
+	height: 39px;
 }
 
 .hc-black .monaco-workbench > .part.panel .title {
@@ -26,7 +26,7 @@
 
 .monaco-workbench > .part.panel > .title > .panel-switcher-container > .monaco-action-bar {
 	padding-left: 12px;
-	line-height: 35px;
+	line-height: 39px;
 }
 
 .monaco-workbench > .part.panel > .title > .panel-switcher-container > .monaco-action-bar .action-item .action-label {

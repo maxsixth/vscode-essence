@@ -111,6 +111,10 @@
 	background: url('split-editor-vertical.svg') center center no-repeat;
 }
 
+.vs .monaco-workbench > .part.editor > .content > .one-editor-silo > .container > .title .split-editor-action {
+	display: none;
+}
+
 .vs-dark .monaco-workbench > .part.editor > .content.vertical-layout > .one-editor-silo > .container > .title .split-editor-action,
 .hc-black .monaco-workbench > .part.editor > .content.vertical-layout > .one-editor-silo > .container > .title .split-editor-action {
 	background: url('split-editor-vertical-inverse.svg') center center no-repeat;

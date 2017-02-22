@@ -36,18 +36,8 @@
 	height: 34px; /* find input height */
 	overflow: hidden;
 	line-height: 19px;
-
-	background-color: #f3f3f3;
-	border: 1px solid #ddd;
-	box-shadow: 0 0 54px rgba(0,0,0,0.045);
-
-	-webkit-transition: top 180ms ease-in-out;
-	-o-transition: top 180ms ease-in-out;
-	-moz-transition: top 180ms ease-in-out;
-	-ms-transition: top 180ms ease-in-out;
-	transition: top 180ms ease-in-out;
-
 	padding: 0 4px;
+	transition: top 180ms ease-in-out;
 }
 /* Find widget when replace is toggled on */
 .monaco-editor .find-widget.replaceToggled {
@@ -59,7 +49,7 @@
 }
 
 .monaco-editor .find-widget.visible {
-	top: 14px;
+	top: 14px !important;
 }
 
 .monaco-editor .find-widget.replaceToggled.visible {
@@ -307,9 +297,9 @@
 }
 
 /* Theming */
-.monaco-editor .find-widget {
-	background-color: #EFEFF2;
-	box-shadow: 0 2px 8px #A8A8A8;
+.monaco-editor.vs .find-widget {
+	background-color: #f3f3f3;
+	border: 1px solid #ddd;
 }
 
 .monaco-editor.vs-dark .find-widget {

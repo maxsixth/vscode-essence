@@ -18,6 +18,10 @@
 	color: white;
 	background: #778899;
 	cursor: pointer;
+	border-radius: 2.25px;
+
+	transition: background 180ms ease-in-out;
+	will-change: background;
 }
 
 .monaco-text-button:hover {
@@ -39,7 +43,7 @@
 .monaco-button.monaco-text-button:not(.disabled):hover,
 .vs-dark .monaco-button.monaco-text-button:not(.disabled):hover,
 .hc-black .monaco-button.monaco-text-button:not(.disabled):hover {
-	background: #006BB3;
+	background: #667788;
 }
 
 .monaco-button.monaco-text-button:not(.disabled):active {
