@@ -57,7 +57,8 @@
 	position: absolute;
 	left: 0;
 	width: 1px;
-	height: 100%; /* TODO: Fix to +4px? */
+	height: 100%;
+	z-index: 1;
 	background: #ddd;
 }
 

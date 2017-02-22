@@ -183,14 +183,22 @@
 	color: #0097FB;
 }
 
-.quick-open-widget .shadow.top {
+/*.quick-open-widget .shadow.top {
+	// TODO
+	// Add when the problem below
+	// is solved.
+
 	height: 22.5px !important;
 	left: 0 !important;
 	box-shadow: inset 0 13.5px 18px white !important;
 	pointer-events: none;
-}
+}*/
 
-.quick-open-widget .shadow.top:after {
+/*.quick-open-widget .shadow.top:after {
+	// TODO
+	// Find a way to anchor it to
+	// the bottom of the parent.
+
 	content: '';
 	position: absolute;
 	height: 22.5px;
@@ -199,7 +207,7 @@
 	top: 198px;
 	box-shadow: inset 0 -13.5px 18px white;
 	pointer-events: none;
-}
+}*/
 
 .quick-open-widget .monaco-tree-row {
 	border-radius: 2px;
