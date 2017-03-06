@@ -6,23 +6,15 @@
 {
 	"command.branch": "분기 만들기...",
 	"command.checkout": "다음으로 체크 아웃...",
-<<<<<<< HEAD
-	"command.clean": "정리",
-	"command.cleanAll": "모두 정리",
-=======
 	"command.clean": "파일 정리",
 	"command.cleanAll": "모든 파일 정리",
 	"command.clone": "복제",
 	"command.commit": "커밋",
->>>>>>> release/1.10
 	"command.commitAll": "모두 커밋",
 	"command.commitAllSigned": "모두 커밋(로그오프됨)",
 	"command.commitStaged": "스테이징된 항목 커밋",
 	"command.commitStagedSigned": "스테이징된 항목 커밋(로그오프됨)",
-<<<<<<< HEAD
-=======
 	"command.init": "리포지토리 초기화",
->>>>>>> release/1.10
 	"command.openChange": "변경 내용 열기",
 	"command.openFile": "파일 열기",
 	"command.publish": "게시",
@@ -31,15 +23,6 @@
 	"command.push": "푸시",
 	"command.pushTo": "다음으로 푸시...",
 	"command.refresh": "새로 고침",
-<<<<<<< HEAD
-	"command.showOutput": "Git 출력 표시",
-	"command.stage": "스테이징",
-	"command.stageAll": "모두 스테이징",
-	"command.sync": "동기화",
-	"command.undoCommit": "마지막 커밋 실행 취소",
-	"command.unstage": "스테이징 취소",
-	"command.unstageAll": "모두 스테이징 취소"
-=======
 	"command.revertSelectedRanges": "선택한 범위 되돌리기",
 	"command.showOutput": "Git 출력 표시",
 	"command.stage": "파일 스테이징",
@@ -58,5 +41,4 @@
 	"config.enableLongCommitWarning": "긴 커밋 메시지에 대해 경고할지 여부입니다.",
 	"config.enabled": "Git 사용 여부",
 	"config.path": "Git 실행 파일의 경로"
->>>>>>> release/1.10
 }

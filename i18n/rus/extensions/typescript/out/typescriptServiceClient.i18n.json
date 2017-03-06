@@ -6,28 +6,17 @@
 {
 	"activeVersion": "Сейчас активно.",
 	"channelName": "TypeScript",
-<<<<<<< HEAD
-=======
 	"later": "Позже",
->>>>>>> release/1.10
 	"learnMore": "Подробнее...",
 	"noServerFound": "Путь {0} не указывает на допустимый файл программы установки tsserver. Выполняется откат до пакетной версии TypeScript.",
 	"reloadBlurb": "Перезагрузите окно, чтобы применить изменения.",
 	"reloadTitle": "Перезагрузка",
-<<<<<<< HEAD
-	"selectTsVersion": "Выберите версию TypeScript, используемую для языковых функций.",
-=======
 	"selectTsVersion": "Выберите версию TypeScript, используемую для языковых функций JavaScript и TypeScript.",
->>>>>>> release/1.10
 	"serverCouldNotBeStarted": "Не удалось запустить языковой сервер TypeScript. Сообщение об ошибке: \"{0}\".",
 	"serverDied": "Языковая служба TypeScript пять раз непредвиденно завершила работу за последние пять минут.",
 	"serverDiedAfterStart": "Языковая служба TypeScript пять раз завершила работу сразу после запуска. Служба не будет перезапущена.",
 	"serverDiedReportIssue": "Сообщить об ошибке",
 	"useVSCodeVersionOption": "Использовать версию VSCode",
 	"useWorkspaceVersionOption": "Использовать версию рабочей области",
-<<<<<<< HEAD
-	"versionCheckUsingBundledTS": "Используется версия TypeScript VSCode {0} для языковых функций Typescript.",
-=======
->>>>>>> release/1.10
 	"versionNumber.custom": "пользовательский"
 }

@@ -6,14 +6,6 @@
 {
 	"command.branch": "Crea ramo...",
 	"command.checkout": "Estrai in...",
-<<<<<<< HEAD
-	"command.clean": "Pulisci",
-	"command.cleanAll": "Pulisci tutto",
-	"command.commitAll": "Esegui commit di tutto",
-	"command.commitAllSigned": "Esegui commit di tutto (approvazione)",
-	"command.commitStaged": "Esegui commit delle righe preparate",
-	"command.commitStagedSigned": "Esegui commit delle righe preparate (approvazione)",
-=======
 	"command.clean": "Pulisci file",
 	"command.cleanAll": "Pulisci tutti i file",
 	"command.clone": "Clona",
@@ -23,7 +15,6 @@
 	"command.commitStaged": "Esegui commit dei file preparati",
 	"command.commitStagedSigned": "Esegui commit dei file preparati (approvazione)",
 	"command.init": "Inizializza repository",
->>>>>>> release/1.10
 	"command.openChange": "Apri modifica",
 	"command.openFile": "Apri file",
 	"command.publish": "Pubblica",
@@ -32,15 +23,6 @@
 	"command.push": "Esegui push",
 	"command.pushTo": "Esegui push in...",
 	"command.refresh": "Aggiorna",
-<<<<<<< HEAD
-	"command.showOutput": "Mostra output GIT",
-	"command.stage": "Prepara per commit",
-	"command.stageAll": "Prepara tutto per commit",
-	"command.sync": "Sincronizza",
-	"command.undoCommit": "Annulla ultimo commit",
-	"command.unstage": "Annulla preparazione per commit",
-	"command.unstageAll": "Annulla preparazione per commit di tutto"
-=======
 	"command.revertSelectedRanges": "Ripristina intervalli selezionati",
 	"command.showOutput": "Mostra output GIT",
 	"command.stage": "Prepara file per commit",
@@ -59,5 +41,4 @@
 	"config.enableLongCommitWarning": "Indica se visualizzare un avviso in caso di messaggi di commit lunghi",
 	"config.enabled": "Indica se GIT è abilitato",
 	"config.path": "Percorso dell'eseguibile di GIT"
->>>>>>> release/1.10
 }

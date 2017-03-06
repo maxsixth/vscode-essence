@@ -8,13 +8,6 @@
 	"colorThemeError": "테마를 알 수 없거나 설치되지 않았습니다.",
 	"error.cannotloadicontheme": "{0}을(를) 로드할 수 없습니다.",
 	"error.cannotloadtheme": "{0}을(를) 로드할 수 없습니다.",
-<<<<<<< HEAD
-	"error.cannotparse": "테마 파일을 구문 분석하는 중 문제 발생: {0}",
-	"error.cannotparseicontheme": "파일 아이콘 파일을 구문 분석하는 동안 문제 발생: {0}",
-	"error.cannotparsejson": "JSON 테마 파일을 구문 분석하는 중 문제 발생: {0}",
-	"error.invalidformat": "JSON 테마 파일 {0}을(를) 구문 분석하는 중 문제가 발생했습니다. 'settings'가 배열이 아닙니다.",
-	"error.plist.invalidformat": "테마 파일을 구문 분석하는 중 문제 발생: {0}. 'settings'가 배열이 아닙니다.",
-=======
 	"error.cannotparse": "테마 파일({0})을 구문 분석하는 중 문제가 발생했습니다.",
 	"error.cannotparseicontheme": "파일 아이콘 파일을 구문 분석하는 동안 문제 발생: {0}",
 	"error.cannotparsejson": "JSON 테마 파일을 구문 분석하는 중 문제 발생: {0}",
@@ -22,7 +15,6 @@
 	"error.plist.invalidformat": "테마 파일({0})을 구문 분석하는 중 문제가 발생했습니다. 'settings'가 배열이 아닙니다.",
 	"iconTheme": "워크벤치에서 사용되는 아이콘 테마를 지정합니다.",
 	"iconThemeError": "파일 아이콘 테마를 알 수 없거나 설치되지 않았습니다.",
->>>>>>> release/1.10
 	"invalid.path.1": "확장 폴더({2}) 내에 포함할 `contributes.{0}.path`({1})가 필요합니다. 확장이 이식 불가능해질 수 있습니다.",
 	"noIconThemeDesc": "파일 아이콘이 없습니다.",
 	"reqarray": "확장점 `{0}`은(는) 배열이어야 합니다.",

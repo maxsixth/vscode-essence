@@ -8,13 +8,6 @@
 	"colorThemeError": "主题未知或未安装。",
 	"error.cannotloadicontheme": "无法加载 {0}",
 	"error.cannotloadtheme": "无法加载 {0}",
-<<<<<<< HEAD
-	"error.cannotparse": "分析主题文件 {0} 时出现问题",
-	"error.cannotparseicontheme": "分析文件图标文件时出现问题: {0}",
-	"error.cannotparsejson": "分析 JSON 主题文件 {0} 时出现问题",
-	"error.invalidformat": "分析 JSON 主题文件 {0} 时出现问题。“设置”不是数组。",
-	"error.plist.invalidformat": "分析主题文件 {0} 时出现问题。“设置”不是数组。",
-=======
 	"error.cannotparse": "分析主题文件时出现问题: {0}",
 	"error.cannotparseicontheme": "分析文件图标文件时出现问题: {0}",
 	"error.cannotparsejson": "分析 JSON 主题文件 {0} 时出现问题",
@@ -22,7 +15,6 @@
 	"error.plist.invalidformat": "分析主题文件时出现问题: {0}。\"settings\" 不是数组。",
 	"iconTheme": "指定用在工作台中的图标主题。",
 	"iconThemeError": "文件图标主题未知或未安装。",
->>>>>>> release/1.10
 	"invalid.path.1": "“contributes.{0}.path”({1})应包含在扩展的文件夹({2})内。这可能会使扩展不可移植。",
 	"noIconThemeDesc": "没有文件图标",
 	"reqarray": "扩展点“{0}”必须是数组。 ",

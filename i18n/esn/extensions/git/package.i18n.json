@@ -12,14 +12,9 @@
 	"command.commit": "Confirmar",
 	"command.commitAll": "Confirmar todo",
 	"command.commitAllSigned": "Confirmar todo (aprobado)",
-<<<<<<< HEAD
-	"command.commitStaged": "Confirmar elementos almacenados provisionalmente",
-	"command.commitStagedSigned": "Confirmar elementos almacenados provisionalmente (aprobado)",
-=======
 	"command.commitStaged": "Confirmar almacenados provisionalmente",
 	"command.commitStagedSigned": "Confirmar archivos almacenados provisionalmente (aprobados)",
 	"command.init": "Inicializar el repositorio",
->>>>>>> release/1.10
 	"command.openChange": "Abrir cambio",
 	"command.openFile": "Abrir archivo",
 	"command.publish": "Publicar",

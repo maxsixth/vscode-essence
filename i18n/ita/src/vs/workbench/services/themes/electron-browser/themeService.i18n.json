@@ -13,11 +13,8 @@
 	"error.cannotparsejson": "Problemi durante l'analisi del file di tema di JSON: {0}",
 	"error.invalidformat": "Problema durante l'analisi del file di tema JSON: {0}. 'settings' non corrisponde a una matrice.",
 	"error.plist.invalidformat": "Problema durante l'analisi del file di tema: {0}. 'settings' non corrisponde a una matrice.",
-<<<<<<< HEAD
-=======
 	"iconTheme": "Specifica il tema dell'icona usato nell'area di lavoro.",
 	"iconThemeError": "Il tema dell'icona del file è sconosciuto o non è stato installato.",
->>>>>>> release/1.10
 	"invalid.path.1": "Valore previsto di `contributes.{0}.path` ({1}) da includere nella cartella dell'estensione ({2}). L'estensione potrebbe non essere più portatile.",
 	"noIconThemeDesc": "Icone del file non disponibili",
 	"reqarray": "Il punto di estensione `{0}` deve essere una matrice.",

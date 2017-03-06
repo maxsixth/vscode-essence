@@ -7,13 +7,9 @@
 	"actions.goToDecl.label": "Gehe zu Definition",
 	"actions.goToDeclToSide.label": "Definition an der Seite öffnen",
 	"actions.goToImplementation.label": "Zur Implementierung wechseln",
-<<<<<<< HEAD
-	"actions.peekImplementation.label": "Vorschauimplementierung",
-=======
 	"actions.goToTypeDefinition.label": "Zur Typdefinition wechseln",
 	"actions.peekImplementation.label": "Vorschau der Implementierung anzeigen",
 	"actions.peekTypeDefinition.label": "Vorschau der Typdefinition anzeigen",
->>>>>>> release/1.10
 	"actions.previewDecl.label": "Peek-Definition",
 	"generic.noResults": "Keine Definition gefunden",
 	"meta.title": " – {0} Definitionen",

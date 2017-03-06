@@ -23,15 +23,10 @@
 	"typescript.check.tscVersion": "Überprüfen, ob sich ein global installierter TypeScript-Compiler (z. B. tsc) vom verwendeten TypeScript-Sprachdienst unterscheidet.",
 	"typescript.disableAutomaticTypeAcquisition": "Deaktiviert die automatische Typerfassung. Erfordert TypeScript >= 2.0.6 und einen Neustart nach der Änderung.",
 	"typescript.format.enable": "Standardmäßigen TypeScript-Formatierer aktivieren/deaktivieren.",
-<<<<<<< HEAD
-	"typescript.referencesCodeLens.enabled": "Referenz-CodeLens aktivieren/deaktivieren",
-	"typescript.reloadProjects.title": "TypeScript-Projekt erneut laden",
-=======
 	"typescript.goToProjectConfig.title": "Zur Projektkonfiguration wechseln",
 	"typescript.referencesCodeLens.enabled": "Referenz zu CodeLens aktivieren/deaktivieren.",
 	"typescript.reloadProjects.title": "Projekt erneut laden",
 	"typescript.selectTypeScriptVersion.title": "TypeScript-Version wählen",
->>>>>>> release/1.10
 	"typescript.tsdk.desc": "Gibt den Ordnerpfad mit den zu verwendenden tsserver- und lib*.d.ts-Dateien an.",
 	"typescript.tsdk_version.desc": "Gibt die Version von tsserver an. Nur erforderlich, wenn der tsserver nicht mithilfe von npm installiert wird.",
 	"typescript.tsserver.experimentalAutoBuild": "Ermöglicht experimentelle automatische Buildvorgänge. Erfordert Version 1.9 dev oder 2.x tsserver sowie einen Neustart von VS Code nach der Änderung.",

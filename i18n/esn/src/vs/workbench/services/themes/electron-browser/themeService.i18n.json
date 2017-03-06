@@ -13,11 +13,8 @@
 	"error.cannotparsejson": "Problemas al analizar el archivo de tema JSON: {0}",
 	"error.invalidformat": "Problema al analizar el archivo de tema de JSON: {0}. \"settings\" no es una matriz.",
 	"error.plist.invalidformat": "Problema al analizar el archivo de tema: {0}. \"settings\" no es una matriz.",
-<<<<<<< HEAD
-=======
 	"iconTheme": "Especifica el tema de icono utilizado en el área de trabajo.",
 	"iconThemeError": "El tema de icono del archivo no es conocido o no está instalado.",
->>>>>>> release/1.10
 	"invalid.path.1": "Se esperaba que 'contributes.{0}.path' ({1}) se incluyera en la carpeta de la extensión ({2}). Esto puede hacer que la extensión no sea portátil.",
 	"noIconThemeDesc": "No hay iconos de archivo",
 	"reqarray": "El punto de extensión '{0}' debe ser una matriz.",
