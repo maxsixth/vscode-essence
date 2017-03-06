@@ -12,7 +12,7 @@ import { CommonEditorConfiguration } from 'vs/editor/common/config/commonEditorC
 import { IDimension } from 'vs/editor/common/editorCommon';
 import { FontInfo, BareFontInfo } from 'vs/editor/common/config/fontInfo';
 import { ElementSizeObserver } from 'vs/editor/browser/config/elementSizeObserver';
-import { FastDomNode } from 'vs/base/browser/styleMutator';
+import { FastDomNode } from 'vs/base/browser/fastDomNode';
 import { CharWidthRequest, CharWidthRequestType, readCharWidths } from 'vs/editor/browser/config/charWidthReader';
 
 class CSSBasedConfigurationCache {
@@ -226,7 +226,7 @@ export class Configuration extends CommonEditorConfiguration {
 		domNode.style.lineHeight = fontInfo.lineHeight + 'px';
 	}
 
-	public static applyFontInfo(domNode: FastDomNode, fontInfo: BareFontInfo): void {
+	public static applyFontInfo(domNode: FastDomNode<HTMLElement>, fontInfo: BareFontInfo): void {
 		domNode.setFontFamily(fontInfo.fontFamily);
 		domNode.setFontWeight(fontInfo.fontWeight);
 		domNode.setFontSize(fontInfo.fontSize);
@@ -290,6 +290,10 @@ export class Configuration extends CommonEditorConfiguration {
 
 	protected _getCanUseTranslate3d(): boolean {
 		return browser.canUseTranslate3d && browser.getZoomLevel() === 0;
+	}
+
+	protected _getPixelRatio(): number {
+		return browser.getPixelRatio();
 	}
 
 	protected readConfiguration(bareFontInfo: BareFontInfo): FontInfo {

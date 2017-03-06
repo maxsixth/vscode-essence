@@ -77,7 +77,8 @@ export class Adapter {
 			}
 		}
 
-		return TPromise.wrapError(new Error(nls.localize('debugAdapterCannotDetermineExecutable', "Cannot determine executable for debug adapter '{0}'.", details.command)));
+		return TPromise.wrapError(new Error(nls.localize({ key: 'debugAdapterCannotDetermineExecutable', comment: ['Adapter executable file not found'] },
+			"Cannot determine executable for debug adapter '{0}'.", details.command)));
 	}
 
 	private getRuntime(): string {
@@ -180,7 +181,9 @@ export class Adapter {
 			const properties = attributes.properties;
 			properties['type'] = {
 				enum: [this.type],
-				description: nls.localize('debugType', "Type of configuration.")
+				description: nls.localize('debugType', "Type of configuration."),
+				pattern: '^(?!node2)',
+				errorMessage: nls.localize('node2NotSupported', "\"node2\" is no longer supported, use \"node\" instead and set the \"protocol\" attribute to \"inspector\".")
 			};
 			properties['name'] = {
 				type: 'string',
@@ -222,6 +225,12 @@ export class Adapter {
 				description: nls.localize('debugLinuxConfiguration', "Linux specific launch configuration attributes."),
 				properties: osProperties
 			};
+			Object.keys(attributes.properties).forEach(name => {
+				// Use schema allOf property to get independent error reporting #21113
+				attributes.properties[name].pattern = attributes.properties[name].pattern || '^(?!\\$\\{(env|config|command)\\.)';
+				attributes.properties[name].patternErrorMessage = attributes.properties[name].patternErrorMessage ||
+					nls.localize('deprecatedVariables', "'env.', 'config.' and 'command.' are deprecated, use 'env:', 'config:' and 'command:' instead.");
+			});
 
 			return attributes;
 		});

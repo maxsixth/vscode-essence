@@ -74,7 +74,12 @@ declare module monaco {
         public done(success?: (value: V) => void, error?: (err: any) => any, progress?: ProgressCallback): void;
         public cancel(): void;
 
+        public static as(value: null): Promise<null>;
+        public static as(value: undefined): Promise<undefined>;
+        public static as<ValueType>(value: Promise<ValueType>): Promise<ValueType>;
+        public static as<ValueType>(value: Thenable<ValueType>): Thenable<ValueType>;
         public static as<ValueType>(value: ValueType): Promise<ValueType>;
+
         public static is(value: any): value is Thenable<any>;
         public static timeout(delay: number): Promise<void>;
         public static join<ValueType>(promises: Promise<ValueType>[]): Promise<ValueType[]>;
@@ -1072,6 +1077,27 @@ declare module monaco.editor {
     }
 
     /**
+     * Configuration options for editor minimap
+     */
+    export interface IEditorMinimapOptions {
+        /**
+         * Enable the rendering of the minimap.
+         * Defaults to false.
+         */
+        enabled?: boolean;
+        /**
+         * Render the actual text on a line (as opposed to color blocks).
+         * Defaults to true.
+         */
+        renderCharacters?: boolean;
+        /**
+         * Limit the width of the minimap to render at most a certain number of columns.
+         * Defaults to 120.
+         */
+        maxColumn?: number;
+    }
+
+    /**
      * Describes how to indent wrapped lines.
      */
     export enum WrappingIndent {
@@ -1176,6 +1202,10 @@ declare module monaco.editor {
          */
         scrollbar?: IEditorScrollbarOptions;
         /**
+         * Control the behavior and rendering of the minimap.
+         */
+        minimap?: IEditorMinimapOptions;
+        /**
          * Display overflow widgets as `fixed`.
          * Defaults to `false`.
          */
@@ -1232,19 +1262,23 @@ declare module monaco.editor {
          */
         automaticLayout?: boolean;
         /**
-         * Control the wrapping strategy of the editor.
-         * Using -1 means no wrapping whatsoever.
-         * Using 0 means viewport width wrapping (ajusts with the resizing of the editor).
-         * Using a positive number means wrapping after a fixed number of characters.
-         * Defaults to 300.
+         * Control the wrapping of the editor.
+         * When `wordWrap` = "off", the lines will never wrap.
+         * When `wordWrap` = "on", the lines will wrap at the viewport width.
+         * When `wordWrap` = "wordWrapColumn", the lines will wrap at `wordWrapColumn`.
+         * When `wordWrap` = "bounded", the lines will wrap at min(viewport width, wordWrapColumn).
+         * Defaults to "off".
          */
-        wrappingColumn?: number;
+        wordWrap?: 'off' | 'on' | 'wordWrapColumn' | 'bounded';
         /**
-         * Control the alternate style of viewport wrapping.
-         * When set to true viewport wrapping is used only when the window width is less than the number of columns specified in the wrappingColumn property. Has no effect if wrappingColumn is not a positive number.
-         * Defaults to false.
+         * Control the wrapping of the editor.
+         * When `wordWrap` = "off", the lines will never wrap.
+         * When `wordWrap` = "on", the lines will wrap at the viewport width.
+         * When `wordWrap` = "wordWrapColumn", the lines will wrap at `wordWrapColumn`.
+         * When `wordWrap` = "bounded", the lines will wrap at min(viewport width, wordWrapColumn).
+         * Defaults to 80.
          */
-        wordWrap?: boolean;
+        wordWrapColumn?: number;
         /**
          * Control indentation of wrapped lines. Can be: 'none', 'same' or 'indent'.
          * Defaults to 'same' in vscode and to 'none' in monaco-editor.
@@ -1267,7 +1301,7 @@ declare module monaco.editor {
         wordWrapBreakObtrusiveCharacters?: string;
         /**
          * Performance guard: Stop rendering a line after x characters.
-         * Defaults to 10000 if wrappingColumn is -1. Defaults to -1 if wrappingColumn is >= 0.
+         * Defaults to 10000.
          * Use -1 to never stop rendering
          */
         stopRenderingLineAfter?: number;
@@ -1321,6 +1355,11 @@ declare module monaco.editor {
          */
         formatOnPaste?: boolean;
         /**
+         * Controls if the editor should allow to move selections via drag and drop.
+         * Defaults to false.
+         */
+        dragAndDrop?: boolean;
+        /**
          * Enable the suggestion box to pop-up on trigger characters.
          * Defaults to true.
          */
@@ -1343,10 +1382,6 @@ declare module monaco.editor {
          * Copying without a selection copies the current line.
          */
         emptySelectionClipboard?: boolean;
-        /**
-         * Enable tab completion. Defaults to 'false'
-         */
-        tabCompletion?: boolean;
         /**
          * Enable word based suggestions. Defaults to 'true'
          */
@@ -1376,6 +1411,11 @@ declare module monaco.editor {
          * Defaults to true in vscode and to false in monaco-editor.
          */
         folding?: boolean;
+        /**
+         * Enable highlighting of matching brackets.
+         * Defaults to true.
+         */
+        matchBrackets?: boolean;
         /**
          * Enable rendering of whitespace.
          * Defaults to none.
@@ -1465,6 +1505,13 @@ declare module monaco.editor {
         readonly mouseWheelScrollSensitivity: number;
     }
 
+    export class InternalEditorMinimapOptions {
+        readonly _internalEditorMinimapOptionsBrand: void;
+        readonly enabled: boolean;
+        readonly renderCharacters: boolean;
+        readonly maxColumn: number;
+    }
+
     export class EditorWrappingInfo {
         readonly _editorWrappingInfoBrand: void;
         readonly isViewportWrapping: boolean;
@@ -1503,6 +1550,7 @@ declare module monaco.editor {
         readonly renderIndentGuides: boolean;
         readonly renderLineHighlight: 'none' | 'gutter' | 'line' | 'all';
         readonly scrollbar: InternalEditorScrollbarOptions;
+        readonly minimap: InternalEditorMinimapOptions;
         readonly fixedOverflowWidgets: boolean;
     }
 
@@ -1533,6 +1581,7 @@ declare module monaco.editor {
         readonly renderIndentGuides: boolean;
         readonly renderLineHighlight: boolean;
         readonly scrollbar: boolean;
+        readonly minimap: boolean;
         readonly fixedOverflowWidgets: boolean;
     }
 
@@ -1551,13 +1600,13 @@ declare module monaco.editor {
         readonly acceptSuggestionOnCommitCharacter: boolean;
         readonly snippetSuggestions: 'top' | 'bottom' | 'inline' | 'none';
         readonly emptySelectionClipboard: boolean;
-        readonly tabCompletion: boolean;
         readonly wordBasedSuggestions: boolean;
         readonly suggestFontSize: number;
         readonly suggestLineHeight: number;
         readonly selectionHighlight: boolean;
         readonly codeLens: boolean;
         readonly folding: boolean;
+        readonly matchBrackets: boolean;
     }
 
     /**
@@ -1571,6 +1620,7 @@ declare module monaco.editor {
         readonly autoClosingBrackets: boolean;
         readonly useTabStops: boolean;
         readonly tabFocusMode: boolean;
+        readonly dragAndDrop: boolean;
         readonly layoutInfo: EditorLayoutInfo;
         readonly fontInfo: FontInfo;
         readonly viewInfo: InternalEditorViewOptions;
@@ -1588,6 +1638,7 @@ declare module monaco.editor {
         readonly autoClosingBrackets: boolean;
         readonly useTabStops: boolean;
         readonly tabFocusMode: boolean;
+        readonly dragAndDrop: boolean;
         readonly layoutInfo: boolean;
         readonly fontInfo: boolean;
         readonly viewInfo: IViewConfigurationChangedEvent;
@@ -2547,6 +2598,14 @@ declare module monaco.editor {
         readonly right: number;
     }
 
+    export enum RenderMinimap {
+        None = 0,
+        Small = 1,
+        Large = 2,
+        SmallBlocks = 3,
+        LargeBlocks = 4,
+    }
+
     /**
      * The internal layout details of the editor.
      */
@@ -2608,6 +2667,18 @@ declare module monaco.editor {
          * The height of the content (actual height)
          */
         readonly contentHeight: number;
+        /**
+         * The width of the minimap
+         */
+        readonly minimapWidth: number;
+        /**
+         * Minimap render type
+         */
+        readonly renderMinimap: RenderMinimap;
+        /**
+         * The number of columns (of typical characters) fitting on a viewport line.
+         */
+        readonly viewportColumn: number;
         /**
          * The width of the vertical scrollbar.
          */
@@ -2734,6 +2805,10 @@ declare module monaco.editor {
          * Mouse is on top of an overlay widget.
          */
         OVERLAY_WIDGET = 12,
+        /**
+         * Mouse is outside of the editor.
+         */
+        OUTSIDE_EDITOR = 13,
     }
 
     /**
@@ -3437,6 +3512,18 @@ declare module monaco.editor {
          * As a horizontal line (sitting under a character).
          */
         Underline = 3,
+        /**
+         * As a thin vertical line (sitting between two characters).
+         */
+        LineThin = 4,
+        /**
+         * As an outlined block (sitting on top of a character).
+         */
+        BlockOutline = 5,
+        /**
+         * As a thin horizontal line (sitting under a character).
+         */
+        UnderlineThin = 6,
     }
 
     /**
@@ -3948,9 +4035,14 @@ declare module monaco.languages {
     export function registerDefinitionProvider(languageId: string, provider: DefinitionProvider): IDisposable;
 
     /**
-     * Register a type implementation provider (used by e.g. go to implementation).
+     * Register a implementation provider (used by e.g. go to implementation).
      */
     export function registerImplementationProvider(languageId: string, provider: ImplementationProvider): IDisposable;
+
+    /**
+     * Register a type definition provider (used by e.g. go to type definition).
+     */
+    export function registerTypeDefinitionProvider(languageId: string, provider: TypeDefinitionProvider): IDisposable;
 
     /**
      * Register a code lens provider (used by e.g. inline code lenses).
@@ -4565,7 +4657,7 @@ declare module monaco.languages {
     }
 
     /**
-     * The type definition provider interface defines the contract between extensions and
+     * The implementation provider interface defines the contract between extensions and
      * the go to implementation feature.
      */
     export interface ImplementationProvider {
@@ -4573,6 +4665,17 @@ declare module monaco.languages {
          * Provide the implementation of the symbol at the given position and document.
          */
         provideImplementation(model: editor.IReadOnlyModel, position: Position, token: CancellationToken): Definition | Thenable<Definition>;
+    }
+
+    /**
+     * The type definition provider interface defines the contract between extensions and
+     * the go to type definition feature.
+     */
+    export interface TypeDefinitionProvider {
+        /**
+         * Provide the type definition of the symbol at the given position and document.
+         */
+        provideTypeDefinition(model: editor.IReadOnlyModel, position: Position, token: CancellationToken): Definition | Thenable<Definition>;
     }
 
     /**

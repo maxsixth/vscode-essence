@@ -371,12 +371,12 @@ declare module 'vscode' {
 		constructor(startLine: number, startCharacter: number, endLine: number, endCharacter: number);
 
 		/**
-		 * `true` iff `start` and `end` are equal.
+		 * `true` if `start` and `end` are equal.
 		 */
 		isEmpty: boolean;
 
 		/**
-		 * `true` iff `start.line` and `end.line` are equal.
+		 * `true` if `start.line` and `end.line` are equal.
 		 */
 		isSingleLine: boolean;
 
@@ -384,7 +384,7 @@ declare module 'vscode' {
 		 * Check if a position or a range is contained in this range.
 		 *
 		 * @param positionOrRange A position or a range.
-		 * @return `true` iff the position or range is inside or equal
+		 * @return `true` if the position or range is inside or equal
 		 * to this range.
 		 */
 		contains(positionOrRange: Position | Range): boolean;
@@ -547,17 +547,29 @@ declare module 'vscode' {
 	 */
 	export enum TextEditorCursorStyle {
 		/**
-		 * Render the cursor as a vertical line.
+		 * Render the cursor as a vertical thick line.
 		 */
 		Line = 1,
 		/**
-		 * Render the cursor as a block.
+		 * Render the cursor as a block filled.
 		 */
 		Block = 2,
 		/**
-		 * Render the cursor as a horizontal line under the character.
+		 * Render the cursor as a thick horizontal line.
 		 */
-		Underline = 3
+		Underline = 3,
+		/**
+		 * Render the cursor as a vertical thin line.
+		 */
+		LineThin = 4,
+		/**
+		 * Render the cursor as a block outlined.
+		 */
+		BlockOutline = 5,
+		/**
+		 * Render the cursor as a thin horizontal line.
+		 */
+		UnderlineThin = 6
 	}
 
 	/**
@@ -1412,6 +1424,21 @@ declare module 'vscode' {
 	}
 
 	/**
+	 * Options to configure the behavior of the message.
+	 *
+	 * @see [showInformationMessage](#window.showInformationMessage)
+	 * @see [showWarningMessage](#window.showWarningMessage)
+	 * @see [showErrorMessage](#window.showErrorMessage)
+	 */
+	export interface MessageOptions {
+
+		/**
+		 * Indicates that this message should be modal.
+		 */
+		modal?: boolean;
+	}
+
+	/**
 	 * Options to configure the behavior of the input box UI.
 	 */
 	export interface InputBoxOptions {
@@ -1650,7 +1677,7 @@ declare module 'vscode' {
 	}
 
 	/**
-	 * The type implemenetation provider interface defines the contract between extensions and
+	 * The implemenetation provider interface defines the contract between extensions and
 	 * the go to implementation feature.
 	 */
 	export interface ImplementationProvider {
@@ -1665,6 +1692,24 @@ declare module 'vscode' {
 		 * signaled by returning `undefined` or `null`.
 		 */
 		provideImplementation(document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Definition>;
+	}
+
+	/**
+	 * The type definition provider defines the contract between extensions and
+	 * the go to type definition feature.
+	 */
+	export interface TypeDefinitionProvider {
+
+		/**
+		 * Provide the type definition of the symbol at the given position and document.
+		 *
+		 * @param document The document in which the command was invoked.
+		 * @param position The position at which the command was invoked.
+		 * @param token A cancellation token.
+		 * @return A definition or a thenable that resolves to such. The lack of a result can be
+		 * signaled by returning `undefined` or `null`.
+		 */
+		provideTypeDefinition(document: TextDocument, position: Position, token: CancellationToken): ProviderResult<Definition>;
 	}
 
 	/**
@@ -2817,7 +2862,7 @@ declare module 'vscode' {
 		 * Check if this configuration has a certain value.
 		 *
 		 * @param section Configuration name, supports _dotted_ names.
-		 * @return `true` iff the section doesn't resolve to `undefined`.
+		 * @return `true` if the section doesn't resolve to `undefined`.
 		 */
 		has(section: string): boolean;
 
@@ -3158,18 +3203,18 @@ declare module 'vscode' {
 		/**
 		 * The tooltip text when you hover over this entry.
 		 */
-		tooltip: string;
+		tooltip: string | undefined;
 
 		/**
 		 * The foreground color for this entry.
 		 */
-		color: string;
+		color: string | undefined;
 
 		/**
 		 * The identifier of a command to run on click. The command must be
 		 * [known](#commands.getCommands).
 		 */
-		command: string;
+		command: string | undefined;
 
 		/**
 		 * Shows the entry in the status bar.
@@ -3410,13 +3455,13 @@ declare module 'vscode' {
 	 * when invoking an editor command not all argument types are supported.
 	 *
 	 * This is a sample that registers a command handler and adds an entry for that command to the palette. First
-	 * register a command handler with the identfier `extension.sayHello`.
+	 * register a command handler with the identifier `extension.sayHello`.
 	 * ```javascript
 	 * commands.registerCommand('extension.sayHello', () => {
 	 * 	window.showInformationMessage('Hello World!');
 	 * });
 	 * ```
-	 * Second, bind the command identfier to a title under which it will show in the palette (`package.json`).
+	 * Second, bind the command identifier to a title under which it will show in the palette (`package.json`).
 	 * ```json
 	 * {
 	 * 	"contributes": {
@@ -3569,6 +3614,17 @@ declare module 'vscode' {
 		export function showInformationMessage(message: string, ...items: string[]): Thenable<string | undefined>;
 
 		/**
+		 * Show an information message to users. Optionally provide an array of items which will be presented as
+		 * clickable buttons.
+		 *
+		 * @param message The message to show.
+		 * @param options Configures the behaviour of the message.
+		 * @param items A set of items that will be rendered as actions in the message.
+		 * @return A thenable that resolves to the selected item or `undefined` when being dismissed.
+		 */
+		export function showInformationMessage(message: string, options: MessageOptions, ...items: string[]): Thenable<string | undefined>;
+
+		/**
 		 * Show an information message.
 		 *
 		 * @see [showInformationMessage](#window.showInformationMessage)
@@ -3578,6 +3634,18 @@ declare module 'vscode' {
 		 * @return A thenable that resolves to the selected item or `undefined` when being dismissed.
 		 */
 		export function showInformationMessage<T extends MessageItem>(message: string, ...items: T[]): Thenable<T | undefined>;
+
+		/**
+		 * Show an information message.
+		 *
+		 * @see [showInformationMessage](#window.showInformationMessage)
+		 *
+		 * @param message The message to show.
+		 * @param options Configures the behaviour of the message.
+		 * @param items A set of items that will be rendered as actions in the message.
+		 * @return A thenable that resolves to the selected item or `undefined` when being dismissed.
+		 */
+		export function showInformationMessage<T extends MessageItem>(message: string, options: MessageOptions, ...items: T[]): Thenable<T | undefined>;
 
 		/**
 		 * Show a warning message.
@@ -3596,10 +3664,34 @@ declare module 'vscode' {
 		 * @see [showInformationMessage](#window.showInformationMessage)
 		 *
 		 * @param message The message to show.
+		 * @param options Configures the behaviour of the message.
+		 * @param items A set of items that will be rendered as actions in the message.
+		 * @return A thenable that resolves to the selected item or `undefined` when being dismissed.
+		 */
+		export function showWarningMessage(message: string, options: MessageOptions, ...items: string[]): Thenable<string | undefined>;
+
+		/**
+		 * Show a warning message.
+		 *
+		 * @see [showInformationMessage](#window.showInformationMessage)
+		 *
+		 * @param message The message to show.
 		 * @param items A set of items that will be rendered as actions in the message.
 		 * @return A thenable that resolves to the selected item or `undefined` when being dismissed.
 		 */
 		export function showWarningMessage<T extends MessageItem>(message: string, ...items: T[]): Thenable<T | undefined>;
+
+		/**
+		 * Show a warning message.
+		 *
+		 * @see [showInformationMessage](#window.showInformationMessage)
+		 *
+		 * @param message The message to show.
+		 * @param options Configures the behaviour of the message.
+		 * @param items A set of items that will be rendered as actions in the message.
+		 * @return A thenable that resolves to the selected item or `undefined` when being dismissed.
+		 */
+		export function showWarningMessage<T extends MessageItem>(message: string, options: MessageOptions, ...items: T[]): Thenable<T | undefined>;
 
 		/**
 		 * Show an error message.
@@ -3618,10 +3710,34 @@ declare module 'vscode' {
 		 * @see [showInformationMessage](#window.showInformationMessage)
 		 *
 		 * @param message The message to show.
+		 * @param options Configures the behaviour of the message.
+		 * @param items A set of items that will be rendered as actions in the message.
+		 * @return A thenable that resolves to the selected item or `undefined` when being dismissed.
+		 */
+		export function showErrorMessage(message: string, options: MessageOptions, ...items: string[]): Thenable<string | undefined>;
+
+		/**
+		 * Show an error message.
+		 *
+		 * @see [showInformationMessage](#window.showInformationMessage)
+		 *
+		 * @param message The message to show.
 		 * @param items A set of items that will be rendered as actions in the message.
 		 * @return A thenable that resolves to the selected item or `undefined` when being dismissed.
 		 */
 		export function showErrorMessage<T extends MessageItem>(message: string, ...items: T[]): Thenable<T | undefined>;
+
+		/**
+		 * Show an error message.
+		 *
+		 * @see [showInformationMessage](#window.showInformationMessage)
+		 *
+		 * @param message The message to show.
+		 * @param options Configures the behaviour of the message.
+		 * @param items A set of items that will be rendered as actions in the message.
+		 * @return A thenable that resolves to the selected item or `undefined` when being dismissed.
+		 */
+		export function showErrorMessage<T extends MessageItem>(message: string, options: MessageOptions, ...items: T[]): Thenable<T | undefined>;
 
 		/**
 		 * Shows a selection list.
@@ -3667,7 +3783,7 @@ declare module 'vscode' {
 		 * Set a message to the status bar. This is a short hand for the more powerful
 		 * status bar [items](#window.createStatusBarItem).
 		 *
-		 * @param text The message to show, support icon subtitution as in status bar [items](#StatusBarItem.text).
+		 * @param text The message to show, supports icon substitution as in status bar [items](#StatusBarItem.text).
 		 * @param hideAfterTimeout Timeout in milliseconds after which the message will be disposed.
 		 * @return A disposable which hides the status bar message.
 		 */
@@ -3677,7 +3793,7 @@ declare module 'vscode' {
 		 * Set a message to the status bar. This is a short hand for the more powerful
 		 * status bar [items](#window.createStatusBarItem).
 		 *
-		 * @param text The message to show, support icon subtitution as in status bar [items](#StatusBarItem.text).
+		 * @param text The message to show, supports icon substitution as in status bar [items](#StatusBarItem.text).
 		 * @param hideWhenDone Thenable on which completion (resolve or reject) the message will be disposed.
 		 * @return A disposable which hides the status bar message.
 		 */
@@ -3690,7 +3806,7 @@ declare module 'vscode' {
 		 * *Note* that status bar messages stack and that they must be disposed when no
 		 * longer used.
 		 *
-		 * @param text The message to show, support icon subtitution as in status bar [items](#StatusBarItem.text).
+		 * @param text The message to show, supports icon substitution as in status bar [items](#StatusBarItem.text).
 		 * @return A disposable which hides the status bar message.
 		 */
 		export function setStatusBarMessage(text: string): Disposable;
@@ -4172,6 +4288,19 @@ declare module 'vscode' {
 		 * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
 		 */
 		export function registerImplementationProvider(selector: DocumentSelector, provider: ImplementationProvider): Disposable;
+
+		/**
+		 * Register a type definition provider.
+		 *
+		 * Multiple providers can be registered for a language. In that case providers are asked in
+		 * parallel and the results are merged. A failing provider (rejected promise or exception) will
+		 * not cause a failure of the whole operation.
+		 *
+		 * @param selector A selector that defines the documents this provider is applicable to.
+		 * @param provider A type definition provider.
+		 * @return A [disposable](#Disposable) that unregisters this provider when being disposed.
+		 */
+		export function registerTypeDefinitionProvider(selector: DocumentSelector, provider: TypeDefinitionProvider): Disposable;
 
 		/**
 		 * Register a hover provider.

@@ -45,7 +45,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 	// propagate focus
 	ipcRenderer.on('focus', function () {
-		getTarget().contentWindow.focus();
+		const target = getTarget();
+		if (target) {
+			target.contentWindow.focus();
+		}
 	});
 
 	// update iframe-contents
@@ -109,10 +112,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 		styleBody(newDocument.body);
 
 		const frame = getTarget();
-		frame.setAttribute('id', '_oldTarget')
+		if (frame) {
+			frame.setAttribute('id', '_oldTarget');
+		}
 
 		// keep current scrollTop around and use later
-		const scrollTop = frame.contentDocument.body.scrollTop;
+		const scrollTop = frame && frame.contentDocument && frame.contentDocument.body ? frame.contentDocument.body.scrollTop : 0;
 
 		const newFrame = document.createElement('iframe');
 		newFrame.setAttribute('id', '_target');
@@ -122,21 +127,22 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 		// write new content onto iframe
 		newFrame.contentDocument.open('text/html', 'replace');
+
+		// workaround for https://github.com/Microsoft/vscode/issues/12865
+		// check new scrollTop and reset if neccessary
+		newFrame.contentWindow.addEventListener('DOMContentLoaded', function () {
+			if (newFrame.contentDocument.body && scrollTop !== newFrame.contentDocument.body.scrollTop) {
+				newFrame.contentDocument.body.scrollTop = scrollTop;
+			}
+			document.body.removeChild(frame);
+			newFrame.style.display = 'block';
+		});
+
 		// set DOCTYPE for newDocument explicitly as DOMParser.parseFromString strips it off
 		// and DOCTYPE is needed in the iframe to ensure that the user agent stylesheet is correctly overridden
 		newFrame.contentDocument.write('<!DOCTYPE html>');
 		newFrame.contentDocument.write(newDocument.documentElement.innerHTML);
 		newFrame.contentDocument.close();
-
-		// workaround for https://github.com/Microsoft/vscode/issues/12865
-		// check new scrollTop and reset if neccessary
-		setTimeout(function () {
-			if (newFrame.contentDocument && newFrame.contentDocument.body && scrollTop !== newFrame.contentDocument.body.scrollTop) {
-				newFrame.contentDocument.body.scrollTop = scrollTop;
-			}
-			document.body.removeChild(frame);
-			newFrame.style.display = 'block';
-		}, 0);
 
 		ipcRenderer.sendToHost('did-set-content', stats);
 	});
@@ -144,7 +150,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 	// Forward message to the embedded iframe
 	ipcRenderer.on('message', function (event, data) {
 		const target = getTarget();
-		target.contentWindow.postMessage(data, 'file://');
+		if (target) {
+			target.contentWindow.postMessage(data, 'file://');
+		}
 	});
 
 	// forward messages from the embedded iframe

@@ -11,6 +11,7 @@
 	"win32RegValueName": "CodeEssence",
 	"win32AppId": "{{E34003BB-9E10-4501-8C11-BE3FAA83F23F}",
 	"win32AppUserModelId": "WilliamEsz.CodeEssence",
+	"win32ShellNameShort": "Code Essence",
 	"darwinBundleIdentifier": "space.esz.code.essence",
 	"reportIssueUrl": "https://github.com/Microsoft/vscode/issues/new",
 	"urlProtocol": "code-essence",

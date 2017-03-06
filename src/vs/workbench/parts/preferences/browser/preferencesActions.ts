@@ -69,7 +69,7 @@ export class OpenWorkspaceSettingsAction extends Action {
 export class ConfigureLanguageBasedSettingsAction extends Action {
 
 	public static ID = 'workbench.action.configureLanguageBasedSettings';
-	public static LABEL = nls.localize('configureLanguageBasedSettings', "Configure language specific settings...");
+	public static LABEL = nls.localize('configureLanguageBasedSettings', "Configure Language Specific Settings...");
 
 	constructor(
 		id: string,
@@ -109,6 +109,7 @@ export class ConfigureLanguageBasedSettingsAction extends Action {
 					return this.modeService.getOrCreateModeByLanguageName(pick.label)
 						.then(mode => this.preferencesService.configureSettingsForLanguage(mode.getLanguageIdentifier().language));
 				}
+				return undefined;
 			});
 
 	}

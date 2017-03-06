@@ -58,8 +58,7 @@ export interface ITerminalConfiguration {
 			setLocaleVariables: boolean,
 			scrollback: number,
 			commandsToSkipShell: string[],
-			cwd: string,
-			flowControl: boolean
+			cwd: string
 		}
 	};
 }
@@ -68,7 +67,6 @@ export interface ITerminalConfigHelper {
 	getTheme(baseThemeId: string): string[];
 	getFont(): ITerminalFont;
 	getFontLigaturesEnabled(): boolean;
-	getFlowControl(): boolean;
 	getCursorBlink(): boolean;
 	getRightClickCopyPaste(): boolean;
 	getCommandsToSkipShell(): string[];
@@ -178,6 +176,24 @@ export interface ITerminalInstance {
 	 * Dispose the terminal instance, removing it from the panel/service and freeing up resources.
 	 */
 	dispose(): void;
+
+	/**
+	 * Registers a link matcher, allowing custom link patterns to be matched and handled.
+	 * @param regex The regular expression the search for, specifically this searches the
+	 * textContent of the rows. You will want to use \s to match a space ' ' character for example.
+	 * @param handler The callback when the link is called.
+	 * @param matchIndex The index of the link from the regex.match(html) call. This defaults to 0
+	 * (for regular expressions without capture groups).
+	 * @return The ID of the new matcher, this can be used to deregister.
+	 */
+	registerLinkMatcher(regex: RegExp, handler: (url: string) => void, matchIndex?: number): number;
+
+	/**
+	 * Deregisters a link matcher if it has been registered.
+	 * @param matcherId The link matcher's ID (returned after register)
+	 * @return Whether a link matcher was found and deregistered.
+	 */
+	deregisterLinkMatcher(matcherId: number): void;
 
 	/**
 	 * Check if anything is selected in terminal.

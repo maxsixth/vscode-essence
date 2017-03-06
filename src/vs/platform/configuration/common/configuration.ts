@@ -87,10 +87,10 @@ export function getConfigurationValue<T>(config: any, settingPath: string, defau
 	function accessSetting(config: any, path: string[]): any {
 		let current = config;
 		for (let i = 0; i < path.length; i++) {
-			current = current[path[i]];
-			if (typeof current === 'undefined' || current === null) {
+			if (typeof current !== 'object' || current === null) {
 				return undefined;
 			}
+			current = current[path[i]];
 		}
 		return <T>current;
 	}
@@ -105,14 +105,11 @@ export interface IConfigModel<T> {
 	contents: T;
 	overrides: IOverrides<T>[];
 	keys: string[];
-	raw: any;
-	unfilteredRaw: any;
 	errors: any[];
 
 	merge(other: IConfigModel<T>, overwrite?: boolean): IConfigModel<T>;
-	config<V>(section: string): V;
+	getContentsFor<V>(section: string): V;
 	configWithOverrides<V>(identifier: string, section?: string): IConfigModel<V>;
-	refilter(): void;
 }
 
 export interface IOverrides<T> {

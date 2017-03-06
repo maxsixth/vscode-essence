@@ -211,7 +211,7 @@ export class ExtensionHostProcessWorker {
 	private tryExtHostHandshake(server: Server): TPromise<any> {
 
 		return new TPromise<IMessagePassingProtocol>((resolve, reject) => {
-			let handle = setTimeout(() => reject('timeout'), 5 * 1000);
+			let handle = setTimeout(() => reject('timeout'), 60 * 1000);
 			server.on('connection', socket => {
 				clearTimeout(handle);
 				const protocol = new Protocol(socket);
@@ -226,11 +226,11 @@ export class ExtensionHostProcessWorker {
 				if (msg === 'ready') {
 					// 1) Host is ready to receive messages, initialize it
 					return this.createExtHostInitData().then(data => protocol.send(stringify(data)));
-
 				} else if (msg === 'initialized') {
 					// 2) Host is initialized
 					this.messagingProtocol.resolve(protocol);
 				}
+				return undefined;
 			});
 		});
 	}

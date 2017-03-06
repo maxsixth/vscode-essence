@@ -14,7 +14,7 @@ import { IKeybindingService, KeybindingSource } from 'vs/platform/keybinding/com
 import { ILifecycleService, ShutdownReason } from 'vs/platform/lifecycle/common/lifecycle';
 import { IStorageService } from 'vs/platform/storage/common/storage';
 import { IWorkspaceContextService } from 'vs/platform/workspace/common/workspace';
-import { ITelemetryService, ITelemetryExperiments, ITelemetryInfo } from 'vs/platform/telemetry/common/telemetry';
+import { ITelemetryService, ITelemetryExperiments, ITelemetryInfo, ITelemetryData } from 'vs/platform/telemetry/common/telemetry';
 import { ServicesAccessor } from 'vs/platform/instantiation/common/instantiation';
 import { StorageService } from 'vs/platform/storage/common/storageService';
 import * as objects from 'vs/base/common/objects';
@@ -22,13 +22,14 @@ import * as objects from 'vs/base/common/objects';
 export const defaultExperiments: ITelemetryExperiments = {
 	showNewUserWatermark: false,
 	openUntitledFile: true,
-	enableWelcomePage: true
+	enableWelcomePage: true,
+	reorderQuickLinks: false,
 };
 
 export const NullTelemetryService = {
 	_serviceBrand: undefined,
 	_experiments: defaultExperiments,
-	publicLog(eventName: string, data?: any) {
+	publicLog(eventName: string, data?: ITelemetryData) {
 		return TPromise.as<void>(null);
 	},
 	isOptedIn: true,
@@ -44,9 +45,6 @@ export const NullTelemetryService = {
 	}
 };
 
-const beginGettingStartedExp = Date.UTC(2017, 0, 9);
-const endGettingStartedExp = Date.UTC(2017, 0, 16);
-
 export function loadExperiments(accessor: ServicesAccessor): ITelemetryExperiments {
 	const contextService = accessor.get(IWorkspaceContextService);
 	const storageService = accessor.get(IStorageService);
@@ -58,8 +56,8 @@ export function loadExperiments(accessor: ServicesAccessor): ITelemetryExperimen
 	let {
 		showNewUserWatermark,
 		openUntitledFile,
-		openGettingStarted,
-		enableWelcomePage
+		enableWelcomePage,
+		reorderQuickLinks,
 	} = splitExperimentsRandomness();
 
 	const newUserDuration = 24 * 60 * 60 * 1000;
@@ -70,17 +68,11 @@ export function loadExperiments(accessor: ServicesAccessor): ITelemetryExperimen
 		openUntitledFile = defaultExperiments.openUntitledFile;
 	}
 
-	const isNewSession = !storageService.get('telemetry.lastSessionDate');
-	const now = Date.now();
-	if (!(isNewSession && now >= beginGettingStartedExp && now < endGettingStartedExp)) {
-		openGettingStarted = undefined;
-	}
-
 	return applyOverrides({
 		showNewUserWatermark,
 		openUntitledFile,
-		openGettingStarted,
-		enableWelcomePage
+		enableWelcomePage,
+		reorderQuickLinks,
 	});
 }
 
@@ -103,13 +95,13 @@ function splitExperimentsRandomness(): ITelemetryExperiments {
 	const random1 = getExperimentsRandomness();
 	const [random2, showNewUserWatermark] = splitRandom(random1);
 	const [random3, openUntitledFile] = splitRandom(random2);
-	const [random4, openGettingStarted] = splitRandom(random3);
+	const [random4, reorderQuickLinks] = splitRandom(random3);
 	const [, enableWelcomePage] = splitRandom(random4);
 	return {
 		showNewUserWatermark,
 		openUntitledFile,
-		openGettingStarted,
-		enableWelcomePage
+		enableWelcomePage,
+		reorderQuickLinks,
 	};
 }
 
@@ -194,6 +186,9 @@ export function telemetryURIDescriptor(uri: URI): URIDescriptor {
 	return fsPath ? { mimeType: guessMimeTypes(fsPath).join(', '), ext: paths.extname(fsPath), path: anonymize(fsPath) } : {};
 }
 
+/**
+ * Only add settings that cannot contain any personal/private information of users (PII).
+ */
 const configurationValueWhitelist = [
 	'window.zoomLevel',
 	'editor.fontSize',
@@ -207,7 +202,8 @@ const configurationValueWhitelist = [
 	'editor.cursorStyle',
 	'files.associations',
 	'workbench.statusBar.visible',
-	'editor.wrappingColumn',
+	'editor.wordWrap',
+	'editor.wordWrapColumn',
 	'editor.insertSpaces',
 	'editor.renderIndentGuides',
 	'files.trimTrailingWhitespace',
@@ -221,6 +217,7 @@ const configurationValueWhitelist = [
 	'editor.formatOnType',
 	'editor.formatOnSave',
 	'editor.formatOnPaste',
+	'editor.dragAndDrop',
 	'window.openFilesInNewWindow',
 	'javascript.validate.enable',
 	'editor.mouseWheelZoom',
@@ -258,6 +255,7 @@ const configurationValueWhitelist = [
 	'editor.hideCursorInOverviewRuler',
 	'editor.trimAutoWhitespace',
 	'editor.folding',
+	'editor.matchBrackets',
 	'workbench.editor.enablePreviewFromQuickOpen',
 	'php.builtInCompletions.enable',
 	'php.validate.enable',

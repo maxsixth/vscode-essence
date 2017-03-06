@@ -34,7 +34,11 @@
 	"miCloseWindow": "&&Fenster schließen",
 	"miCommandPalette": "&&Befehlspalette...",
 	"miCopy": "&&Kopieren",
+<<<<<<< HEAD
 	"miCopyLinesDown": "Zeile nach unten kop&&pieren",
+=======
+	"miCopyLinesDown": "Zeile nach unten ko&&pieren",
+>>>>>>> release/1.10
 	"miCopyLinesUp": "Zeile nach oben &&kopieren",
 	"miCut": "&&Ausschneiden",
 	"miDocumentation": "&&Dokumentation",
@@ -101,7 +105,7 @@
 	"miSelectAll": "&&Alles auswählen",
 	"miSelectColorTheme": "&&Farbdesign",
 	"miSelectHighlights": "Alle V&&orkommen auswählen",
-	"miSelectIconTheme": "Datei- &&Symboldesign",
+	"miSelectIconTheme": "Datei-&&Symboldesign",
 	"miShowActivityBar": "&&Aktivitätsleiste anzeigen",
 	"miShowEmmetCommands": "E&&mmet...",
 	"miShowStatusbar": "&&Statusleiste anzeigen",

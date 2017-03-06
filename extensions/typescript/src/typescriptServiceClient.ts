@@ -12,7 +12,7 @@ import * as fs from 'fs';
 import * as electron from './utils/electron';
 import { Reader } from './utils/wireProtocol';
 
-import { workspace, window, Uri, CancellationToken, OutputChannel, Memento, MessageItem, QuickPickItem, EventEmitter, Event, commands, WorkspaceConfiguration } from 'vscode';
+import { workspace, window, Uri, CancellationToken, Disposable, OutputChannel, Memento, MessageItem, QuickPickItem, EventEmitter, Event, commands, WorkspaceConfiguration } from 'vscode';
 import * as Proto from './protocol';
 import { ITypescriptServiceClient, ITypescriptServiceClientHost, API } from './typescriptService';
 
@@ -22,7 +22,7 @@ import * as is from './utils/is';
 import TelemetryReporter from 'vscode-extension-telemetry';
 
 import * as nls from 'vscode-nls';
-let localize = nls.loadMessageBundle();
+const localize = nls.loadMessageBundle();
 
 interface CallbackItem {
 	c: (value: any) => void;
@@ -124,11 +124,13 @@ export default class TypeScriptServiceClient implements ITypescriptServiceClient
 	private _apiVersion: API;
 	private telemetryReporter: TelemetryReporter;
 
-	constructor(host: ITypescriptServiceClientHost, storagePath: string | undefined, globalState: Memento, private workspaceState: Memento) {
+
+	constructor(host: ITypescriptServiceClientHost, storagePath: string | undefined, globalState: Memento, private workspaceState: Memento, disposables: Disposable[]) {
 		this.host = host;
 		this.storagePath = storagePath;
 		this.globalState = globalState;
 		this.pathSeparator = path.sep;
+		this.lastStart = Date.now();
 
 		var p = new Promise<void>((resolve, reject) => {
 			this._onReady = { promise: p, resolve, reject };
@@ -153,7 +155,7 @@ export default class TypeScriptServiceClient implements ITypescriptServiceClient
 		this._apiVersion = new API('1.0.0');
 		this._checkGlobalTSCVersion = true;
 		this.trace = this.readTrace();
-		workspace.onDidChangeConfiguration(() => {
+		disposables.push(workspace.onDidChangeConfiguration(() => {
 			this.trace = this.readTrace();
 			let oldglobalTsdk = this.globalTsdk;
 			let oldLocalTsdk = this.localTsdk;
@@ -165,9 +167,10 @@ export default class TypeScriptServiceClient implements ITypescriptServiceClient
 			if (this.servicePromise === null && (oldglobalTsdk !== this.globalTsdk || oldLocalTsdk !== this.localTsdk)) {
 				this.startService();
 			}
-		});
+		}));
 		if (this.packageInfo && this.packageInfo.aiKey) {
 			this.telemetryReporter = new TelemetryReporter(this.packageInfo.name, this.packageInfo.version, this.packageInfo.aiKey);
+			disposables.push(this.telemetryReporter);
 		}
 		this.startService();
 	}
@@ -604,6 +607,10 @@ export default class TypeScriptServiceClient implements ITypescriptServiceClient
 	}
 
 	private getTypeScriptVersion(serverPath: string): string | undefined {
+		if (!fs.existsSync(serverPath)) {
+			return undefined;
+		}
+
 		let p = serverPath.split(path.sep);
 		if (p.length <= 2) {
 			return undefined;
@@ -639,7 +646,9 @@ export default class TypeScriptServiceClient implements ITypescriptServiceClient
 			let startService = true;
 			if (this.numberRestarts > 5) {
 				let prompt: Thenable<MyMessageItem | undefined> | undefined = undefined;
+				this.numberRestarts = 0;
 				if (diff < 60 * 1000 /* 1 Minutes */) {
+					this.lastStart = Date.now();
 					prompt = window.showWarningMessage<MyMessageItem>(
 						localize('serverDied', 'The TypeScript language service died unexpectedly 5 times in the last 5 Minutes.'),
 						{
@@ -647,7 +656,8 @@ export default class TypeScriptServiceClient implements ITypescriptServiceClient
 							id: MessageAction.reportIssue,
 							isCloseAffordance: true
 						});
-				} else if (diff < 2 * 1000 /* 2 seconds */) {
+				} else if (diff < 10 * 1000 /* 10 seconds */) {
+					this.lastStart = Date.now();
 					startService = false;
 					prompt = window.showErrorMessage<MyMessageItem>(
 						localize('serverDiedAfterStart', 'The TypeScript language service died 5 times right after it got started. The service will not be restarted.'),
@@ -663,6 +673,7 @@ export default class TypeScriptServiceClient implements ITypescriptServiceClient
 						if (item && item.id === MessageAction.reportIssue) {
 							return commands.executeCommand('workbench.action.reportIssues');
 						}
+						return undefined;
 					});
 				}
 			}
@@ -693,7 +704,9 @@ export default class TypeScriptServiceClient implements ITypescriptServiceClient
 	}
 
 	public asUrl(filepath: string): Uri {
-		if (filepath.startsWith(TypeScriptServiceClient.WALK_THROUGH_SNIPPET_SCHEME_COLON)) {
+		if (filepath.startsWith(TypeScriptServiceClient.WALK_THROUGH_SNIPPET_SCHEME_COLON)
+			|| (filepath.startsWith('untitled:') && this._apiVersion.has213Features())
+		) {
 			return Uri.parse(filepath);
 		}
 		return Uri.file(filepath);

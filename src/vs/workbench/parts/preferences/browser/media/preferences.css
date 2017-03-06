@@ -147,14 +147,7 @@
 
 .settings-header-widget > .settings-search-container > .settings-search-input > .monaco-inputbox .input {
 	font-size: 14px;
-	padding-left:30px;
-	background-image: url('search.svg');
-	background-repeat: no-repeat;
-	background-position: 8px 50%;
-}
-
-.settings-header-widget > .settings-search-container > .settings-search-input > .monaco-inputbox .input {
-	background-image: url('search_inverse.svg');
+	padding-left:10px;
 }
 
 .vs-dark .preferences-editor .side-by-side-preferences-editor > .editable-preferences-editor-container {
@@ -192,15 +185,9 @@
 	outline: none !important;
 }
 
-.monaco-editor.vs .settings-group-title-widget .title-container.focused,
-.monaco-editor.vs .settings-group-title-widget .title-container:hover {
-	background-color: #e2e2e2;
-}
-
-.monaco-editor.hc-black .settings-group-title-widget .title-container:hover,
-.monaco-editor.vs-dark .settings-group-title-widget .title-container.focused,
-.monaco-editor.vs-dark .settings-group-title-widget .title-container:hover {
-	background-color: #323232;
+.monaco-editor .settings-group-title-widget .title-container.focused,
+.monaco-editor .settings-group-title-widget .title-container:hover {
+	background-color: rgba(153, 153, 153, 0.2);
 }
 
 .monaco-editor.hc-black .settings-group-title-widget .title-container.focused {

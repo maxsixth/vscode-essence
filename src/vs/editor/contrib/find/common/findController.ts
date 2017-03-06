@@ -612,13 +612,65 @@ export class AddSelectionToNextFindMatchAction extends SelectNextFindMatchAction
 	}
 
 	public run(accessor: ServicesAccessor, editor: editorCommon.ICommonCodeEditor): void {
+		const allSelections = editor.getSelections();
+
+		// If there are mulitple cursors, handle the case where they do not all select the same text.
+		if (allSelections.length > 1) {
+			const model = editor.getModel();
+			const controller = CommonFindController.get(editor);
+			if (!controller) {
+				return;
+			}
+			const findState = controller.getState();
+			const caseSensitive = findState.matchCase;
+
+			let selectionsContainSameText = true;
+
+			let selectedText = model.getValueInRange(allSelections[0]);
+			if (!caseSensitive) {
+				selectedText = selectedText.toLowerCase();
+			}
+			for (let i = 1, len = allSelections.length; i < len; i++) {
+				let selection = allSelections[i];
+				if (selection.isEmpty()) {
+					selectionsContainSameText = false;
+					break;
+				}
+
+				let thisSelectedText = model.getValueInRange(selection);
+				if (!caseSensitive) {
+					thisSelectedText = thisSelectedText.toLowerCase();
+				}
+				if (selectedText !== thisSelectedText) {
+					selectionsContainSameText = false;
+					break;
+				}
+			}
+
+			if (!selectionsContainSameText) {
+				let resultingSelections: Selection[] = [];
+				for (let i = 0, len = allSelections.length; i < len; i++) {
+					let selection = allSelections[i];
+					if (selection.isEmpty()) {
+						let word = editor.getModel().getWordAtPosition(selection.getStartPosition());
+						if (word) {
+							resultingSelections[i] = new Selection(selection.startLineNumber, word.startColumn, selection.startLineNumber, word.endColumn);
+							continue;
+						}
+					}
+					resultingSelections[i] = selection;
+				}
+				editor.setSelections(resultingSelections);
+				return;
+			}
+		}
+
 		let nextMatch = this._getNextMatch(editor);
 
 		if (!nextMatch) {
 			return;
 		}
 
-		let allSelections = editor.getSelections();
 		editor.setSelections(allSelections.concat(nextMatch));
 		editor.revealRangeInCenterIfOutsideViewport(nextMatch);
 	}
@@ -862,10 +914,25 @@ export class SelectionHighlighter extends Disposable implements editorCommon.IEd
 			this.removeDecorations();
 			return;
 		}
+
+		const controller = CommonFindController.get(this.editor);
+		if (!controller) {
+			this.removeDecorations();
+			return;
+		}
+		const findState = controller.getState();
+		const caseSensitive = findState.matchCase;
+
 		let selections = this.editor.getSelections();
 		let firstSelectedText = model.getValueInRange(selections[0]);
+		if (!caseSensitive) {
+			firstSelectedText = firstSelectedText.toLowerCase();
+		}
 		for (let i = 1; i < selections.length; i++) {
 			let selectedText = model.getValueInRange(selections[i]);
+			if (!caseSensitive) {
+				selectedText = selectedText.toLowerCase();
+			}
 			if (firstSelectedText !== selectedText) {
 				// not all selections have the same text
 				this.removeDecorations();

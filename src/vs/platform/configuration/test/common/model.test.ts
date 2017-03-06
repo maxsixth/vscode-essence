@@ -13,7 +13,7 @@ suite('ConfigurationService - Model', () => {
 
 	suiteSetup(() => {
 		Registry.as<IConfigurationRegistry>(Extensions.Configuration).registerConfiguration({
-			'id': 'problems',
+			'id': 'a',
 			'order': 1,
 			'title': 'a',
 			'type': 'object',
@@ -76,10 +76,10 @@ suite('ConfigurationService - Model', () => {
 
 	test('Test contents while getting an existing property', () => {
 		let testObject = new model.ConfigModel(JSON.stringify({ 'a': 1 }));
-		assert.deepEqual(testObject.config('a'), 1);
+		assert.deepEqual(testObject.getContentsFor('a'), 1);
 
 		testObject = new model.ConfigModel(JSON.stringify({ 'a': { 'b': 1 } }));
-		assert.deepEqual(testObject.config('a'), { 'b': 1 });
+		assert.deepEqual(testObject.getContentsFor('a'), { 'b': 1 });
 	});
 
 	test('Test contents are undefined for non existing properties', () => {
@@ -87,13 +87,13 @@ suite('ConfigurationService - Model', () => {
 			awesome: true
 		}));
 
-		assert.deepEqual(testObject.config('unknownproperty'), undefined);
+		assert.deepEqual(testObject.getContentsFor('unknownproperty'), undefined);
 	});
 
 	test('Test contents are undefined for undefined config', () => {
 		const testObject = new model.ConfigModel(null);
 
-		assert.deepEqual(testObject.config('unknownproperty'), undefined);
+		assert.deepEqual(testObject.getContentsFor('unknownproperty'), undefined);
 	});
 
 	test('Test configWithOverrides gives all content merged with overrides', () => {
@@ -106,6 +106,58 @@ suite('ConfigurationService - Model', () => {
 		const testObject = new model.ConfigModel(null);
 
 		assert.deepEqual(testObject.configWithOverrides('b').contents, {});
+	});
+
+	test('Test update with empty data', () => {
+		const testObject = new model.ConfigModel();
+		testObject.update('');
+
+		assert.deepEqual(testObject.contents, {});
+		assert.deepEqual(testObject.keys, []);
+
+		testObject.update(null);
+
+		assert.deepEqual(testObject.contents, {});
+		assert.deepEqual(testObject.keys, []);
+
+		testObject.update(undefined);
+
+		assert.deepEqual(testObject.contents, {});
+		assert.deepEqual(testObject.keys, []);
+	});
+
+	test('Test registering the same property again', () => {
+		Registry.as<IConfigurationRegistry>(Extensions.Configuration).registerConfiguration({
+			'id': 'a',
+			'order': 1,
+			'title': 'a',
+			'type': 'object',
+			'properties': {
+				'a': {
+					'description': 'a',
+					'type': 'boolean',
+					'default': false,
+				}
+			}
+		});
+		assert.equal(true, new model.DefaultConfigModel().getContentsFor('a'));
+	});
+
+	test('Test registering the language property', () => {
+		Registry.as<IConfigurationRegistry>(Extensions.Configuration).registerConfiguration({
+			'id': '[a]',
+			'order': 1,
+			'title': 'a',
+			'type': 'object',
+			'properties': {
+				'[a]': {
+					'description': 'a',
+					'type': 'boolean',
+					'default': false,
+				}
+			}
+		});
+		assert.equal(undefined, new model.DefaultConfigModel().getContentsFor('[a]'));
 	});
 
 });

@@ -21,6 +21,7 @@ import * as emmet from 'emmet';
 import * as path from 'path';
 import * as pfs from 'vs/base/node/pfs';
 import Severity from 'vs/base/common/severity';
+import { ITelemetryService } from 'vs/platform/telemetry/common/telemetry';
 
 interface IEmmetConfiguration {
 	emmet: {
@@ -92,6 +93,8 @@ class LazyEmmet {
 		return this._loadEmmet().then((_emmet: typeof emmet) => {
 			this._messageService = messageService;
 			this._withEmmetPreferences(configurationService, _emmet, callback);
+		}, (e) => {
+			callback(null);
 		});
 	}
 
@@ -149,6 +152,7 @@ class LazyEmmet {
 						return TPromise.join([snippetsPromise, profilesPromise, preferencesPromise]);
 					}
 					this._messageService.show(Severity.Error, `The path set in emmet.extensionsPath "${LazyEmmet.extensionsPath}" does not exist.`);
+					return undefined;
 				});
 			}
 		}
@@ -236,10 +240,14 @@ export abstract class EmmetEditorAction extends EditorAction {
 
 			if (!editorAccessor.isEmmetEnabledMode()) {
 				this.noExpansionOccurred(editor);
-				return;
+				return undefined;
 			}
 
 			return LazyEmmet.withConfiguredEmmet(configurationService, messageService, workspaceRoot, (_emmet) => {
+				if (!_emmet) {
+					this.noExpansionOccurred(editor);
+					return undefined;
+				}
 				editorAccessor.onBeforeEmmetAction();
 				instantiationService.invokeFunction((accessor) => {
 					this.runEmmetAction(accessor, new EmmetActionContext(editor, _emmet, editorAccessor));
@@ -267,8 +275,16 @@ export class BasicEmmetEditorAction extends EmmetEditorAction {
 	}
 
 	public runEmmetAction(accessor: ServicesAccessor, ctx: EmmetActionContext) {
-		if (!ctx.emmet.run(this.emmetActionName, ctx.editorAccessor)) {
+		const telemetryService = accessor.get(ITelemetryService);
+		try {
+			if (!ctx.emmet.run(this.emmetActionName, ctx.editorAccessor)) {
+				this.noExpansionOccurred(ctx.editor);
+			} else if (this.emmetActionName === 'expand_abbreviation') {
+				telemetryService.publicLog('emmetActionSucceeded', { action: this.emmetActionName });
+			}
+		} catch (err) {
 			this.noExpansionOccurred(ctx.editor);
 		}
+
 	}
 }

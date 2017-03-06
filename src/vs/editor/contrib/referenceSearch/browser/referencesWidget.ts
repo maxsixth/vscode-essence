@@ -171,6 +171,7 @@ class DataSource implements tree.IDataSource {
 		} else if (element instanceof OneReference) {
 			return (<OneReference>element).id;
 		}
+		return undefined;
 	}
 
 	public hasChildren(tree: tree.ITree, element: any): boolean {
@@ -180,6 +181,7 @@ class DataSource implements tree.IDataSource {
 		if (element instanceof FileReferences && !(<FileReferences>element).failure) {
 			return true;
 		}
+		return false;
 	}
 
 	public getChildren(tree: tree.ITree, element: ReferencesModel | FileReferences): TPromise<any[]> {
@@ -383,7 +385,7 @@ class Renderer extends LegacyRenderer {
 			const preview = element.parent.preview.preview(element.range);
 
 			if (!preview) {
-				return;
+				return undefined;
 			}
 
 			$('.reference').innerHtml(
@@ -503,7 +505,7 @@ export class ReferenceWidget extends PeekViewWidget {
 		private _contextService: IWorkspaceContextService,
 		private _instantiationService: IInstantiationService
 	) {
-		super(editor, { frameColor: '#778899', showFrame: false, showArrow: true, isResizeable: true });
+		super(editor, { showFrame: false, showArrow: true, isResizeable: true });
 
 		this._instantiationService = this._instantiationService.createChild(new ServiceCollection([IPeekViewService, this]));
 		this.create();
@@ -541,7 +543,7 @@ export class ReferenceWidget extends PeekViewWidget {
 	protected _fillBody(containerElement: HTMLElement): void {
 		var container = $(containerElement);
 
-		container.addClass('reference-zone-widget');
+		this.setCssClass('reference-zone-widget');
 
 		// message pane
 		container.div({ 'class': 'messages' }, div => {
@@ -555,7 +557,10 @@ export class ReferenceWidget extends PeekViewWidget {
 				scrollBeyondLastLine: false,
 				scrollbar: DefaultConfig.editor.scrollbar,
 				overviewRulerLanes: 2,
-				fixedOverflowWidgets: true
+				fixedOverflowWidgets: true,
+				minimap: {
+					enabled: false
+				}
 			};
 
 			this._preview = this._instantiationService.createInstance(EmbeddedCodeEditorWidget, div.getHTMLElement(), options, this.editor);
@@ -633,6 +638,7 @@ export class ReferenceWidget extends PeekViewWidget {
 		if (this._model) {
 			return this._onNewModel();
 		}
+		return undefined;
 	}
 
 	private _onNewModel(): TPromise<any> {
@@ -701,6 +707,7 @@ export class ReferenceWidget extends PeekViewWidget {
 				return element.children[0];
 			}
 		}
+		return undefined;
 	}
 
 	private _revealReference(reference: OneReference) {
